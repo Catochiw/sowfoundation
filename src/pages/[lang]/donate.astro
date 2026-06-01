@@ -1,0 +1,39 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PageHero from "@components/PageHero.astro";
+import DonateButtons from "@components/DonateButtons.astro";
+import { getCollection, render } from "astro:content";
+import { allLocales, type Lang, t } from "@i18n/ui";
+
+export async function getStaticPaths() {
+  return allLocales.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+
+// Optional rich content: src/content/pages/{lang}/donation.md
+const all = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "donation");
+const donationPage = all[0];
+const DonationBody = donationPage ? (await render(donationPage)).Content : null;
+---
+
+<Layout lang={lang} title={t(lang, "donate.title")} pathWithoutLang="/donate">
+  <PageHero
+    eyebrow={t(lang, "site.tagline")}
+    title={t(lang, "donate.title")}
+    subtitle={t(lang, "donate.intro")}
+  />
+
+  <section class="section">
+    <div class="container-wide max-w-5xl">
+      <DonateButtons lang={lang} />
+    </div>
+  </section>
+
+  {DonationBody && (
+    <section class="section section-alt">
+      <article class="container-prose prose-content">
+        <DonationBody />
+      </article>
+    </section>
+  )}
+</Layout>

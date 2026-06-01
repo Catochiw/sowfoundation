@@ -1,0 +1,150 @@
+---
+import type { Lang } from "@i18n/ui";
+import { t } from "@i18n/ui";
+import { nav, localizedHref } from "@data/nav";
+import LangSwitcher from "@components/LangSwitcher.astro";
+
+interface Props {
+  lang: Lang;
+  pathWithoutLang: string;
+}
+
+const { lang, pathWithoutLang } = Astro.props;
+---
+
+<header
+  class="sticky top-0 z-40 backdrop-blur-xl bg-[color-mix(in_oklab,white_85%,transparent)] border-b border-[color:var(--color-ink-300)]"
+>
+  <div class="container-wide flex h-[60px] items-center justify-between gap-4">
+    <a
+      href={`/${lang}`}
+      class="flex items-center gap-2 font-semibold tracking-tight text-[color:var(--color-ink-900)] hover:text-[color:var(--color-ink-900)]"
+      aria-label={t(lang, "site.name")}
+    >
+      <img src="/sow-logo.png" alt="" width="28" height="28" class="rounded-md" />
+      <span class="text-base">{t(lang, "site.name")}</span>
+      <span class="hidden sm:inline text-[color:var(--color-ink-500)] text-sm font-normal">
+        · {t(lang, "site.tagline")}
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center gap-1 text-sm">
+        {nav.map((item) => (
+          <li class="relative group">
+            <a
+              href={localizedHref(lang, item.href)}
+              class="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[color:var(--color-ink-700)] hover:bg-[color:var(--color-ink-100)] hover:text-[color:var(--color-ink-900)]"
+            >
+              <span>{t(lang, item.labelKey as any)}</span>
+              {item.children && (
+                <svg class="size-3 opacity-60" viewBox="0 0 12 12" fill="none">
+                  <path d="M3 4.5 6 7.5l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              )}
+            </a>
+            {item.children && (
+              <div class="absolute left-1/2 top-full -translate-x-1/2 hidden group-hover:block group-focus-within:block pt-2">
+                <ul
+                  class="min-w-[200px] rounded-2xl border border-[color:var(--color-ink-300)] bg-white p-1.5 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.18)]"
+                >
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={localizedHref(lang, child.href)}
+                        class="block rounded-xl px-3 py-2 text-sm text-[color:var(--color-ink-700)] hover:bg-[color:var(--color-ink-100)] hover:text-[color:var(--color-ink-900)]"
+                      >
+                        {t(lang, child.labelKey as any)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <LangSwitcher lang={lang} pathWithoutLang={pathWithoutLang} />
+
+      <a
+        href={localizedHref(lang, "/donate")}
+        class="hidden md:inline-flex btn btn-primary text-sm py-2 px-4 hover:btn-primary-hover"
+      >
+        {t(lang, "nav.donate")}
+      </a>
+
+      <button
+        type="button"
+        class="lg:hidden inline-flex size-9 items-center justify-center rounded-full border border-[color:var(--color-ink-300)] text-[color:var(--color-ink-900)]"
+        aria-label={t(lang, "nav.menu")}
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        data-mobile-toggle
+      >
+        <svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 6h14M3 10h14M3 14h14" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <div
+    id="mobile-nav"
+    class="lg:hidden hidden border-t border-[color:var(--color-ink-300)] bg-white"
+    data-mobile-nav
+  >
+    <nav class="container-wide py-4" aria-label="Mobile">
+      <ul class="flex flex-col gap-1">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={localizedHref(lang, item.href)}
+              class="block rounded-xl px-3 py-2.5 text-base font-medium text-[color:var(--color-ink-900)] hover:bg-[color:var(--color-ink-100)]"
+            >
+              {t(lang, item.labelKey as any)}
+            </a>
+            {item.children && (
+              <ul class="ml-3 mt-1 mb-2 flex flex-col gap-0.5 border-l border-[color:var(--color-ink-300)] pl-3">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={localizedHref(lang, child.href)}
+                      class="block rounded-lg px-3 py-2 text-sm text-[color:var(--color-ink-700)] hover:bg-[color:var(--color-ink-100)] hover:text-[color:var(--color-ink-900)]"
+                    >
+                      {t(lang, child.labelKey as any)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+        <li class="mt-2">
+          <a
+            href={localizedHref(lang, "/donate")}
+            class="btn btn-primary w-full justify-center hover:btn-primary-hover"
+          >
+            {t(lang, "nav.donate")}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle — minimal, no framework
+  const btn = document.querySelector<HTMLButtonElement>("[data-mobile-toggle]");
+  const drawer = document.querySelector<HTMLElement>("[data-mobile-nav]");
+  if (btn && drawer) {
+    btn.addEventListener("click", () => {
+      const open = drawer.classList.toggle("hidden") === false;
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  }
+</script>

@@ -1,0 +1,136 @@
+---
+import type { Lang } from "@i18n/ui";
+import { slides } from "@data/slides";
+import { localizedHref } from "@data/nav";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="relative bg-[color:var(--color-ink-50)] pb-0">
+  <div
+    class="embla relative w-full overflow-hidden"
+    aria-roledescription="carousel"
+    aria-label="Highlights"
+  >
+    <div class="embla__viewport overflow-hidden" data-embla-viewport>
+      <div class="embla__container flex">
+        {slides.map((s, i) => {
+          const caption = lang === "zh" ? s.caption_zh : s.caption_en;
+          return (
+            <div
+              class="embla__slide relative flex-[0_0_100%] min-w-0"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}`}
+            >
+              <a href={localizedHref(lang, s.href)} class="block relative isolate group">
+                <div class="aspect-[21/9] sm:aspect-[16/6] w-full bg-[color:var(--color-ink-100)] overflow-hidden">
+                  <img
+                    src={s.image}
+                    alt={caption}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    fetchpriority={i === 0 ? "high" : "auto"}
+                    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+                  <div class="container-wide">
+                    <p class="text-white text-lg sm:text-xl md:text-2xl font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] max-w-2xl">
+                      {caption}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 sm:px-6">
+      <button
+        type="button"
+        class="pointer-events-auto inline-flex size-10 items-center justify-center rounded-full bg-white/85 backdrop-blur shadow-md text-[color:var(--color-ink-900)] hover:bg-white"
+        aria-label="Previous"
+        data-embla-prev
+      >
+        <svg viewBox="0 0 20 20" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 4l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="pointer-events-auto inline-flex size-10 items-center justify-center rounded-full bg-white/85 backdrop-blur shadow-md text-[color:var(--color-ink-900)] hover:bg-white"
+        aria-label="Next"
+        data-embla-next
+      >
+        <svg viewBox="0 0 20 20" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M8 4l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Dots -->
+    <div class="absolute inset-x-0 bottom-3 flex justify-center gap-1.5" data-embla-dots>
+      {slides.map((_, i) => (
+        <button
+          type="button"
+          class="size-2 rounded-full bg-white/60 transition-all data-[active=true]:w-6 data-[active=true]:bg-white"
+          aria-label={`Slide ${i + 1}`}
+          data-embla-dot={i}
+        ></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  const viewport = document.querySelector<HTMLElement>("[data-embla-viewport]");
+  if (viewport) {
+    const embla = EmblaCarousel(viewport, {
+      loop: true,
+      align: "start",
+      duration: 25,
+    });
+
+    // Autoplay (simple, no extra plugin)
+    let timer: number | null = null;
+    const stop = () => { if (timer) window.clearInterval(timer); timer = null; };
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => embla.scrollNext(), 6000);
+    };
+    start();
+    viewport.addEventListener("mouseenter", stop);
+    viewport.addEventListener("mouseleave", start);
+    viewport.addEventListener("focusin", stop);
+    viewport.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop(); else start();
+    });
+
+    // Prev / Next
+    document.querySelector("[data-embla-prev]")?.addEventListener("click", () => embla.scrollPrev());
+    document.querySelector("[data-embla-next]")?.addEventListener("click", () => embla.scrollNext());
+
+    // Dots
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-embla-dot]"));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => embla.scrollTo(i)));
+
+    const setActive = () => {
+      const idx = embla.selectedScrollSnap();
+      dots.forEach((d, i) => d.setAttribute("data-active", String(i === idx)));
+    };
+    embla.on("select", setActive);
+    embla.on("init", setActive);
+    setActive();
+  }
+</script>

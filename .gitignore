@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnp.*
+
+# Build output
+dist/
+.astro/
+.vercel/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Internal data (not for public repo)
+data/internal/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

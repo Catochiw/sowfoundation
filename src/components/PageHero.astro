@@ -1,0 +1,55 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  banner?: string;
+}
+const { eyebrow, title, subtitle, banner } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  {banner ? (
+    <div class="relative">
+      <div class="aspect-[16/7] sm:aspect-[16/6] w-full bg-[color:var(--color-ink-100)] overflow-hidden">
+        <img
+          src={banner}
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+        <div class="container-wide">
+          {eyebrow && (
+            <p class="text-xs sm:text-sm uppercase tracking-[0.16em] text-white/80 font-medium">
+              {eyebrow}
+            </p>
+          )}
+          <h1 class="mt-2 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{title}</h1>
+          {subtitle && (
+            <p class="mt-3 max-w-2xl text-white/90 text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+              {subtitle}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div class="container-prose text-center pt-20 pb-10">
+      {eyebrow && (
+        <p class="text-sm uppercase tracking-[0.16em] text-[color:var(--color-brand-600)] font-medium">
+          {eyebrow}
+        </p>
+      )}
+      <h1 class="mt-3">{title}</h1>
+      {subtitle && (
+        <p class="mt-4 text-lg text-[color:var(--color-ink-500)] max-w-2xl mx-auto">
+          {subtitle}
+        </p>
+      )}
+    </div>
+  )}
+</section>

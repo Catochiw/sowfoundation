@@ -1,0 +1,102 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PageHero from "@components/PageHero.astro";
+import { getCollection } from "astro:content";
+import { allLocales, type Lang, t } from "@i18n/ui";
+import { localizedHref } from "@data/nav";
+
+export async function getStaticPaths() {
+  return allLocales.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+
+const tourPages = (
+  await getCollection("pages", ({ data }) => data.lang === lang && data.group === "tours")
+).sort((a, b) => a.data.order - b.data.order);
+const tourEntries = (
+  await getCollection("tours", ({ data }) => data.lang === lang)
+).sort((a, b) => {
+  // upcoming first, then by order
+  const sa = a.data.status === "upcoming" ? 0 : a.data.status === "draft" ? 1 : 2;
+  const sb = b.data.status === "upcoming" ? 0 : b.data.status === "draft" ? 1 : 2;
+  if (sa !== sb) return sa - sb;
+  return a.data.order - b.data.order;
+});
+---
+
+<Layout lang={lang} title={t(lang, "nav.tours")} pathWithoutLang="/tours">
+  <PageHero
+    eyebrow={t(lang, "site.tagline")}
+    title={t(lang, "nav.tours")}
+    subtitle={t(lang, "home.tours.subtitle")}
+  />
+
+  {tourEntries.length > 0 && (
+    <section class="section">
+      <div class="container-wide">
+        <h2 class="mb-8 text-2xl">
+          {lang === "zh" ? "近期旅遊團" : "Upcoming tours"}
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {tourEntries.map((tour) => {
+            const slug = tour.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+            return (
+              <a
+                href={localizedHref(lang, `/tours/${slug}`)}
+                class="group relative overflow-hidden rounded-2xl bg-white border border-[color:var(--color-ink-300)] hover:border-[color:var(--color-ink-500)] transition-colors"
+              >
+                {tour.data.banner && (
+                  <div class="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={tour.data.banner}
+                      alt=""
+                      loading="lazy"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div class="p-6">
+                  <h3 class="text-xl">{tour.data.title}</h3>
+                  {tour.data.dateRange && (
+                    <p class="mt-1 text-sm text-[color:var(--color-ink-500)]">
+                      {tour.data.dateRange}
+                    </p>
+                  )}
+                  {tour.data.summary && (
+                    <p class="mt-3 text-sm text-[color:var(--color-ink-700)] line-clamp-2">
+                      {tour.data.summary}
+                    </p>
+                  )}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {tourPages.length > 0 && (
+    <section class="section section-alt">
+      <div class="container-wide">
+        <h2 class="mb-8 text-2xl">
+          {lang === "zh" ? "事工介紹" : "About our tours"}
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {tourPages.map((p) => {
+            const slug = p.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+            return (
+              <a href={localizedHref(lang, `/tours/${slug}`)} class="card-soft block">
+                <h3>{p.data.title}</h3>
+                {p.data.summary && <p class="mt-3 text-sm text-[color:var(--color-ink-500)]">{p.data.summary}</p>}
+                <p class="mt-5 text-sm font-medium text-[color:var(--color-brand-600)]">
+                  {t(lang, "common.read_more")} →
+                </p>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>

@@ -1,0 +1,150 @@
+---
+import type { Lang } from "@i18n/ui";
+import { t } from "@i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
+---
+
+<form
+  data-contact-form
+  method="POST"
+  action="/api/contact"
+  class="space-y-5"
+  novalidate
+>
+  <input type="hidden" name="lang" value={lang} />
+  <!-- Honeypot -->
+  <div class="absolute -left-[10000px]" aria-hidden="true">
+    <label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div>
+    <label for="cf-name" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+      {t(lang, "contact.form.name")} <span class="text-[color:var(--color-error)]">*</span>
+    </label>
+    <input
+      id="cf-name"
+      name="name"
+      type="text"
+      required
+      maxlength="120"
+      autocomplete="name"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none"
+    />
+  </div>
+
+  <div>
+    <label for="cf-email" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+      {t(lang, "contact.form.email")} <span class="text-[color:var(--color-error)]">*</span>
+    </label>
+    <input
+      id="cf-email"
+      name="email"
+      type="email"
+      required
+      maxlength="200"
+      autocomplete="email"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none"
+    />
+  </div>
+
+  <div>
+    <label for="cf-message" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+      {t(lang, "contact.form.message")} <span class="text-[color:var(--color-error)]">*</span>
+    </label>
+    <textarea
+      id="cf-message"
+      name="message"
+      required
+      rows="6"
+      maxlength="5000"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none resize-y"
+    ></textarea>
+  </div>
+
+  {turnstileSiteKey && (
+    <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+  )}
+
+  <div class="flex items-center gap-4">
+    <button
+      type="submit"
+      class="btn btn-primary hover:btn-primary-hover"
+      data-cf-submit
+    >
+      <span data-cf-label>{t(lang, "contact.form.submit")}</span>
+    </button>
+    <p
+      class="text-sm hidden"
+      data-cf-status
+      role="status"
+      aria-live="polite"
+    ></p>
+  </div>
+</form>
+
+{turnstileSiteKey && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
+
+<script define:vars={{ messages: {
+  submit: t(lang, "contact.form.submit"),
+  submitting: t(lang, "contact.form.submitting"),
+  success: t(lang, "contact.form.success"),
+  error: t(lang, "contact.form.error"),
+  required: t(lang, "contact.form.required"),
+}}}>
+  const form = document.querySelector("[data-contact-form]");
+  if (form) {
+    const submit = form.querySelector("[data-cf-submit]");
+    const label = form.querySelector("[data-cf-label]");
+    const status = form.querySelector("[data-cf-status]");
+
+    const setStatus = (msg, kind) => {
+      if (!status) return;
+      status.textContent = msg;
+      status.classList.remove("hidden");
+      status.classList.remove("text-[color:var(--color-success)]", "text-[color:var(--color-error)]");
+      status.classList.add(kind === "ok"
+        ? "text-[color:var(--color-success)]"
+        : "text-[color:var(--color-error)]");
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      submit.setAttribute("disabled", "true");
+      label.textContent = messages.submitting;
+
+      try {
+        const res = await fetch(form.action, { method: "POST", body: data });
+        if (res.ok) {
+          form.reset();
+          if (window.turnstile) {
+            // Re-render the widget so user can submit again
+            const w = form.querySelector(".cf-turnstile");
+            if (w) window.turnstile.reset();
+          }
+          setStatus(messages.success, "ok");
+        } else {
+          setStatus(messages.error, "err");
+        }
+      } catch (err) {
+        console.error(err);
+        setStatus(messages.error, "err");
+      } finally {
+        submit.removeAttribute("disabled");
+        label.textContent = messages.submit;
+      }
+    });
+  }
+</script>

@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design system — Apple-inspired, calm, content-first.
+   ------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "Segoe UI", "Noto Sans TC", "PingFang TC",
+    "Microsoft JhengHei", system-ui, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue",
+    "Noto Sans TC", "PingFang TC", system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Apple-ish neutral palette */
+  --color-ink-900: #1d1d1f;       /* primary text */
+  --color-ink-700: #424245;       /* secondary text */
+  --color-ink-500: #6e6e73;       /* tertiary text */
+  --color-ink-300: #d2d2d7;       /* hairlines */
+  --color-ink-100: #f5f5f7;       /* section background */
+  --color-ink-50:  #fbfbfd;       /* subtle background */
+  --color-white:   #ffffff;
+
+  /* Brand */
+  --color-brand-600: #0a7d8f;     /* primary action (deep teal) */
+  --color-brand-700: #086a7a;
+  --color-brand-500: #14a0b5;
+  --color-brand-50:  #f0fbfd;
+
+  /* Accents */
+  --color-warm-600: #b85c00;      /* CTA accent for donate-style highlights */
+  --color-success: #1f8a3b;
+  --color-error: #c93a3a;
+}
+
+/* Base resets ============================================================ */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background: var(--color-white);
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "calt", "ss01";
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brand-600) 25%, transparent);
+  color: var(--color-ink-900);
+}
+
+/* Typography defaults ===================================================== */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-ink-900);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+h1 { font-size: clamp(2.25rem, 4vw + 1rem, 4rem); }
+h2 { font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem); }
+h4 { font-size: 1.125rem; }
+
+p, li { color: var(--color-ink-700); }
+
+a {
+  color: var(--color-brand-600);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+a:hover { color: var(--color-brand-700); }
+
+/* Focus ================================================================== */
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Utility primitives ====================================================== */
+@utility container-narrow {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@utility container-prose {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@utility container-wide {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 980px;        /* Apple-style pill */
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: all 180ms ease;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+@utility btn-primary {
+  background: var(--color-brand-600);
+  color: var(--color-white);
+}
+@utility btn-primary-hover {
+  background: var(--color-brand-700);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--color-brand-600) 50%, transparent);
+}
+@utility btn-secondary {
+  background: var(--color-white);
+  color: var(--color-ink-900);
+  border-color: var(--color-ink-300);
+}
+@utility btn-secondary-hover {
+  border-color: var(--color-ink-500);
+}
+@utility btn-ghost {
+  background: transparent;
+  color: var(--color-ink-900);
+}
+
+/* Pre-styled, longform "prose" content ==================================== */
+.prose-content {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-ink-700);
+}
+.prose-content > * + * { margin-top: 1.1em; }
+.prose-content h1,
+.prose-content h2,
+.prose-content h3 {
+  color: var(--color-ink-900);
+  margin-top: 2em;
+}
+.prose-content h1 { font-size: 2rem; }
+.prose-content h2 { font-size: 1.5rem; }
+.prose-content h3 { font-size: 1.25rem; }
+.prose-content p { margin: 0; }
+.prose-content a {
+  color: var(--color-brand-600);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-brand-600) 30%, transparent);
+}
+.prose-content a:hover {
+  color: var(--color-brand-700);
+  border-bottom-color: var(--color-brand-700);
+}
+.prose-content blockquote {
+  margin: 1.5em 0;
+  padding: 0.5em 0 0.5em 1.25em;
+  border-left: 3px solid var(--color-brand-500);
+  color: var(--color-ink-700);
+  font-style: normal;
+  background: var(--color-brand-50);
+  border-radius: 0 8px 8px 0;
+}
+.prose-content ul,
+.prose-content ol {
+  padding-left: 1.5em;
+}
+.prose-content ul { list-style-type: disc; }
+.prose-content ol { list-style-type: decimal; }
+.prose-content li { margin: 0.4em 0; }
+.prose-content img,
+.prose-content picture {
+  margin: 1.5em auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+}
+.prose-content hr {
+  margin: 2.5em 0;
+  border: 0;
+  border-top: 1px solid var(--color-ink-300);
+}
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1.5em 0;
+}
+.prose-content th,
+.prose-content td {
+  text-align: left;
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--color-ink-300);
+}
+.prose-content th {
+  font-weight: 600;
+  color: var(--color-ink-900);
+  background: var(--color-ink-50);
+}
+.prose-content code {
+  font-family: var(--font-mono);
+  background: var(--color-ink-100);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Sections ================================================================ */
+.section {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+}
+.section-tight {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+.section-alt {
+  background: var(--color-ink-50);
+}
+
+/* Cards =================================================================== */
+.card-soft {
+  background: var(--color-white);
+  border: 1px solid var(--color-ink-300);
+  border-radius: 18px;
+  padding: 1.75rem;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.card-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 20px 40px -16px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-ink-500);
+}
+
+/* Animations ============================================================== */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 600ms ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,71 @@
+---
+import type { Lang } from "@i18n/ui";
+import { t, tf } from "@i18n/ui";
+import { localizedHref } from "@data/nav";
+import { contactInfo } from "@data/donation";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[color:var(--color-ink-300)] bg-[color:var(--color-ink-50)]">
+  <div class="container-wide py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="space-y-3">
+        <a
+          href={`/${lang}`}
+          class="flex items-center gap-2 font-semibold text-[color:var(--color-ink-900)] hover:text-[color:var(--color-ink-900)]"
+        >
+          <img src="/sow-logo.png" width="28" height="28" alt="" class="rounded-md" />
+          <span>{t(lang, "site.name")}</span>
+        </a>
+        <p class="text-sm text-[color:var(--color-ink-500)] max-w-xs">
+          {t(lang, "footer.tagline")}
+        </p>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold text-[color:var(--color-ink-900)]">
+          {t(lang, "nav.programs")}
+        </h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href={localizedHref(lang, "/programs/senior-care")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.programs.senior_care")}</a></li>
+          <li><a href={localizedHref(lang, "/programs/disaster-relief")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.programs.disaster_relief")}</a></li>
+          <li><a href={localizedHref(lang, "/programs/poverty-relief")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.programs.poverty_relief")}</a></li>
+          <li><a href={localizedHref(lang, "/programs/scholarship")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.programs.scholarship")}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold text-[color:var(--color-ink-900)]">
+          {t(lang, "nav.tours")}
+        </h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href={localizedHref(lang, "/tours/holy-land")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.tours.holy_land")}</a></li>
+          <li><a href={localizedHref(lang, "/tours/ark")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.tours.ark")}</a></li>
+          <li><a href={localizedHref(lang, "/donate")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.donate")}</a></li>
+          <li><a href={localizedHref(lang, "/contact")} class="text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]">{t(lang, "nav.contact")}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold text-[color:var(--color-ink-900)]">
+          {t(lang, "nav.contact")}
+        </h4>
+        <address class="not-italic text-sm space-y-1.5 text-[color:var(--color-ink-700)]">
+          <div>{contactInfo.address}</div>
+          <div><a href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`} class="hover:underline">{contactInfo.phone}</a></div>
+          <div><a href={`mailto:${contactInfo.email}`} class="hover:underline">{contactInfo.email}</a></div>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-10 border-t border-[color:var(--color-ink-300)] pt-6 text-xs text-[color:var(--color-ink-500)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <p>{tf(lang, "footer.copyright", { year })}</p>
+      <p>501(c)(3) Nonprofit · EIN on request</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PageHero from "@components/PageHero.astro";
+import ContactForm from "@components/ContactForm.astro";
+import { allLocales, type Lang, t } from "@i18n/ui";
+import { contactInfo } from "@data/donation";
+
+export async function getStaticPaths() {
+  return allLocales.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+---
+
+<Layout lang={lang} title={t(lang, "contact.title")} pathWithoutLang="/contact">
+  <PageHero
+    eyebrow={t(lang, "site.tagline")}
+    title={t(lang, "contact.title")}
+    subtitle={t(lang, "contact.intro")}
+  />
+
+  <section class="section">
+    <div class="container-wide max-w-5xl">
+      <div class="grid gap-12 lg:grid-cols-[1fr_320px]">
+        <div>
+          <ContactForm lang={lang} />
+        </div>
+        <aside class="space-y-6">
+          <div>
+            <h4 class="text-sm font-semibold uppercase tracking-wide text-[color:var(--color-ink-500)]">
+              {t(lang, "contact.address")}
+            </h4>
+            <address class="not-italic mt-2 text-[color:var(--color-ink-900)]">
+              {contactInfo.address}
+            </address>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold uppercase tracking-wide text-[color:var(--color-ink-500)]">
+              {t(lang, "contact.phone")}
+            </h4>
+            <p class="mt-2">
+              <a href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`} class="text-[color:var(--color-ink-900)] hover:underline">
+                {contactInfo.phone}
+              </a>
+            </p>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold uppercase tracking-wide text-[color:var(--color-ink-500)]">
+              {t(lang, "contact.email")}
+            </h4>
+            <p class="mt-2">
+              <a href={`mailto:${contactInfo.email}`} class="text-[color:var(--color-ink-900)] hover:underline">
+                {contactInfo.email}
+              </a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>

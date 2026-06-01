@@ -1,0 +1,41 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PageHero from "@components/PageHero.astro";
+import { getCollection } from "astro:content";
+import { allLocales, type Lang, t } from "@i18n/ui";
+import { localizedHref } from "@data/nav";
+
+export async function getStaticPaths() {
+  return allLocales.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+
+const aboutPages = (await getCollection("pages", ({ data }) => data.lang === lang && data.group === "about"))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout lang={lang} title={t(lang, "nav.about")} pathWithoutLang="/about">
+  <PageHero
+    eyebrow={t(lang, "site.tagline")}
+    title={t(lang, "nav.about")}
+  />
+
+  <section class="section">
+    <div class="container-wide">
+      <div class="grid gap-6 md:grid-cols-2">
+        {aboutPages.map((p) => {
+          const slug = p.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+          return (
+            <a href={localizedHref(lang, `/about/${slug}`)} class="card-soft block">
+              <h3>{p.data.title}</h3>
+              {p.data.summary && <p class="mt-3 text-[color:var(--color-ink-500)]">{p.data.summary}</p>}
+              <p class="mt-5 text-sm font-medium text-[color:var(--color-brand-600)]">
+                {t(lang, "common.read_more")} →
+              </p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>

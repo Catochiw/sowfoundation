@@ -1,0 +1,40 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PageHero from "@components/PageHero.astro";
+import { getCollection, render } from "astro:content";
+import { allLocales, type Lang, t } from "@i18n/ui";
+
+export async function getStaticPaths() {
+  const paths: { params: { lang: Lang; slug: string } }[] = [];
+  for (const lang of allLocales) {
+    const pages = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "about");
+    for (const page of pages) {
+      const slug = page.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+      paths.push({ params: { lang, slug } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: Lang; slug: string };
+const all = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "about");
+const entry = all.find((p) => p.id.endsWith(`/${slug}.md`) || p.id.endsWith(`${slug}.md`));
+if (!entry) {
+  return new Response("Not found", { status: 404 });
+}
+const { Content } = await render(entry);
+---
+
+<Layout lang={lang} title={entry.data.title} pathWithoutLang={`/about/${slug}`}>
+  <PageHero
+    eyebrow={t(lang, "nav.about")}
+    title={entry.data.title}
+    banner={entry.data.banner}
+  />
+
+  <section class="section">
+    <article class="container-prose prose-content">
+      <Content />
+    </article>
+  </section>
+</Layout>

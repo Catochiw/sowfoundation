@@ -1,0 +1,90 @@
+---
+title: "龍川行記"
+group: reports
+order: 1
+banner: "/images/20181101/20181101225704_11193.jpg"
+lang: zh
+summary: "一行八人於 2018 年探訪龍川愛心助學受助學生,記錄探訪見聞與感動。"
+---
+
+<p class="p1"><span class="s1"><strong>河源龍川兩天行記</strong></span></p>
+<p class="p2"><span class="s1"><a title="圖片" href="https://photos.app.goo.gl/ymTDiwRT3aSCuhr28">圖片</a></span></p>
+<p class="p2">&nbsp;</p>
+<p class="p2"><span class="s1">退休閒賦多年，生活枯燥。聽聞好友</span><span class="s2">美國樂助會董事會主席</span><span class="s1">陳志輝兄近期會到廣東河源市龍川縣探訪</span><span class="s2">樂助會</span><span class="s3">(</span><span class="s2">註</span><span class="s3">1)</span><span class="s1">參與資助的山區貧困學生，由於筆者過去從事新聞工作，好奇社會事態，欣然隨行。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1">在香港儲運慈善基金</span><span class="s4">(</span><span class="s1">註</span><span class="s4">2)</span><span class="s1">主席葉偉光和副主席麥鉅開率領下，五名慈善基金捐款人士加上筆者，一行八人，於九月廿九日從香港出發，訪問龍川縣第一中學</span><span class="s4"> (</span><span class="s1">龍川一中</span><span class="s4">) </span><span class="s1">兩天。在五個多小時車程中，麥鉅開簡單介紹慈善基金的「希望工程班」</span><span class="s4">(</span><span class="s1">註</span><span class="s4">3)</span><span class="s1">自助、互助計劃。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1"><strong>希望工程班開展</strong></span></p>
+<p class="p2"><span class="s1">早於幾十年前已有希望工程，興建校舍。時間流轉，學生來源不穩定和校舍維修的周張，使設立校舍的效果已不顯著。國內已實施九年義務教育，十二年的免費教育仍未到位。廣東是富庶省份，就只有珠海和深圳市於年前實施了十二年義務教育。很多其他地區的學生，就算中考成績優異，奈何家庭經濟未能負擔高一至高三，每年三千元人民幣的學費，就只能放棄高中教育的機會。慈善基金覺得有須要將資源投放於這些學生身上，於是八年前，覓得「龍川一中」，成立了第一屆「希望工程班」。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1"><strong>再窮也不能窮教育</strong></span></p>
+<p class="p2"><span class="s1">「龍川一中」是一所什麼學校？龍川縣在河源以北，車程距離要個多小時。很多人心目中的河源是廣東經濟落後地區，龍川自然更差。然而，當汽車停在學校大門前，出乎意料，校舍極具規模。門前迎接我們的是一位充滿陽光活力的年輕女副校長</span><span class="s4">&ndash;</span><span class="s1">鍾慧娟。她把我們帶到校內的歷史展館，展出由</span><span class="s4">1913</span><span class="s1">創校至今的演變。現址是該校的高中部，佔地三百畝，有七十多班，每班六十人，全校共四千多人。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1">她說：十四年前這地段原是撥作地方政府的辦公樓。但領導人深思熟慮後，決定地方再窮也不能窮教育的理念下，在這三百畝的土地上興建校舍。將龍川高中部遷到這裡，為縣內及隣近的莘莘學子，提供理想的學習設施和環境，提高教育水平。經過十四年的逐步擴展，龍川一中已有多幢教學樓、寛敞宿舍、會堂、運動場、游泳池（也開放公眾使用）、綠化休憩區、購物店、洗衣店、銀行自動櫃員機等生活區。然而，政府破舊的辦公房舍仍在原址，修修補補了事。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1"><strong>由懷疑至熱忱</strong></span></p>
+<p class="p2"><span class="s1">龍川一中的發展，最令鍾慧娟意想不到的莫過於「希望工程班」的開展。回想八年前首次接觸香港儲運慈善基金這個構思時，她總覺得計劃一年後會無疾而終。怎料辦了一年又一年，由開始資助六十名高一學生，到第三年，高一至高三。三班學生共一百八十人後，她對慈善基金背後儲蓄互助社運動精神完全改觀，尤其深被他們的理念、籌組以至推行的努力所打動。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1"><strong>求深不求廣</strong></span></p>
+<p class="p2"><span class="s1">國家現在的政策是精準扶貧，慈善基金早於多年前推動「希望工程班」計劃的助學理念也循著這方向走，不求廣，而求精深，對學生在校每一個細節都非常重視。現今經濟環境，募集善款提供物質需要可說容易，往後學生還缺乏什麼支援？主席葉偉光説，除了物質，慈善基金董事會發覺，精神支柱亦十分重要。所以在獲善長捐款後，還鼓勵他們認領或協助他們配對學生。鼓勵他們盡量在資助年內到龍川一中探訪，面對面接觸連繫，給予關愛鼓勵，又或互相通信，認識對方。慈善基金不惜人力物力，一年舉辦四次探訪活動</span><span class="s4">(</span><span class="s1">註</span><span class="s4">4)</span><span class="s1">，使學生和捐款人士建立了密切關係。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1"><strong>自助、互助的成功</strong></span></p>
+<p class="p2"><span class="s1">又為什麼要將受資助學生放在同一班呢？來自山區或貧困戶的少年，性格多內向、羞澀、靦腆、不善社交，集中一班，豈不容易被標籤而受白眼？此做法是有作用的，因慈善基金其中一個工作目標是發揚自助、互助精神。學生來自同一背景，有共同困惑，凝聚他們，可使他們團結一致，互助互愛，共同努力克服困難。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1">這些針對性的工作和意向，鍾慧娟副校長都看在眼裡。壓根兒她就是一位盡心盡力的教育工作者，所以義不容辭的全面配合，倍加輔導和訓練，提高他們的情商，加強個人全面的發展。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s1">她說：經過多年的經驗累積，「希望工程班」不獨學業成績卓越，羣策羣力的課外或公益活動，都受各方嘉許。同學以身為「希工班」一分子為榮，其他班級同學都爭取參與「希工班」的活動。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>改變人生的助學</strong></span></p>
+<p class="p1"><span class="s1">至於個別學生的發展更顯而易見。很多由高一升上高二的時候，已判若兩人。最突出的例子就是前年收了一位面部嚴重被火燒傷毀容的男同學，一副不像常人的面孔出現在幾千人的羣體?，壓力可想而知。令鍾慧娟欣慰的是，一年的「希工班」生活，徹底將他改造了。他在學校或「希工班」組織的多次活動中積極參與，自信表現。充滿自信的在舞台上載歌載舞，完全開放自己，覺得自己與他人無異，全校的同學也不會向他投以奇異的眼光。他今年在高一和高二「希工班」聯誼晚會中，代表高三「希工班」登台演唱，壓軸表演。聯誼晚會剛巧在訪問團到埗當晚上演，也見到他的表現。筆者深信日後他走出校園，面向世界時，也不會在乎別人的目光，更不在乎自己滿面疤痕的樣貌。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">另一樣使訪問團察覺的就是同學們台前幕後合作無間：男同學的街舞、女生的</span><span class="s2">K-pop</span><span class="s1">舞、結他合唱、集體遊戲、相聲等等，都中規中矩。十五、六歲孩子們有此能力，已不可多得。</span><span class="s2">(</span><span class="s1">筆者按：晚會不是特定為訪問團而辦，只是適逢其會。</span><span class="s2">)</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>早熟孤兒</strong></span></p>
+<p class="p1"><span class="s1">晚會前是訪問團的晚膳時間，慈善基金安排七名由成員助學的學生一同進餐會面。坐在筆者身旁的是一名健談的男孩</span><span class="s2">&ndash;</span><span class="s1">駱同學。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">我問：後天是十一國慶，學校休假，明天回家了，家在那裡？</span></p>
+<p class="p1"><span class="s1">他說</span><span class="s2"> : </span><span class="s1">家在很遠的山區，車程差不多三小時，然後再步行五至六公里才能到達。</span></p>
+<p class="p1"><span class="s1">我問：家有什麼人？</span></p>
+<p class="p1"><span class="s1">他説：有伯父。</span></p>
+<p class="p1"><span class="s1">我問：爸爸、媽媽不在？</span></p>
+<p class="p1"><span class="s1">他說：是。</span></p>
+<p class="p1"><span class="s1">我問：將來想做什麼？</span></p>
+<p class="p1"><span class="s1">他說：參軍。</span></p>
+<p class="p1"><span class="s1">我說：那麼要考什麼大學？有人民軍事大學之類？</span></p>
+<p class="p1"><span class="s1">坐在同桌的駕車師傅</span><span class="s2"> (</span><span class="s1">他是從深圳送我們到龍川的司機</span><span class="s2">) </span><span class="s1">連忙解釋：他意思是高中畢業後應徵入伍，當一名士兵。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">筆者稍後才意會，因家境貧困，伯父還有兒女。駱同學須要盡快就業，回饋伯父多年的照顧。他的故事，稍後待續。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>渴望</strong></span></p>
+<p class="p1"><span class="s1">晚膳及晚會後已過九點，距學生晚修結束時分還有一小時，而「希工班」學生已返回課室。鍾慧娟建議我們分成兩組，分別探訪高一及高二同學。高三同學就不好打擾了，因他們正加緊應付高考。聰敏的鍾副校長此時又靈機一動，她知道團員中有來自美國，希望我們全程以英語和學生對話。她理解同學非常渴望有學習英語機會，畢竟國內一般學生這方面的水平力有不逮。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">以英語對話，在座同學懂得多少就不得而知。但一張張殷切的面孔、一雙雙明亮的眸子，可以感覺到他們對英語溝通的期望。直到校鐘響起，晚修結束，課室大樓關燈，仍有學生團團圍着我們，要加微信或其他聯絡方式。這時有一位個子不比我高的女孩子走到我身旁，真摯的執着我的手說：「你很瘦，看你的手腕，這麼細﹗」我回答：「我老了，骨質疏鬆。」第一天的行程，就此結束。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>態度的改變</strong></span></p>
+<p class="p1"><span class="s1">翌日上午是與龍川一中吳志可校長見面。吳校長校務纏身，從滿滿日程安排中抽身與訪問團會面。開始時他不諱言他三年前到任龍川一中校長，慈善基金「希望工程班」的成績和鍾副校長工作的熱誠，重大改變了他的工作態度。使他領悟到認真、細致、關注、加上愛心去辦事所帶來的成果和歡慰，是他以前想象不到的，驅使他也全情支持和投入「希工班」的項目。就此證明了儲運自助、互助的影響力不可謂不深遠。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>同學會與家訪</strong></span></p>
+<p class="p1"><span class="s1">談到互助，鍾慧娟又說出一個故事：慈善基金和學校都很着重團結精神。「希工班」畢業後有希望工程班同學會，進行各項義工活動，使他們懂得回饋社會。例如暑假期間舉行義教，亦與龍川大學生成長促進會合辦環保義工服務。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">其中一項最有意義的工作，是由應屆畢業同學應邀幫助學校和慈善基金組織家訪隊，走訪新一屆百餘位的「希工班」申請學生，核實他們是否符合申請資格。他們要招募和組織志願者、分區、分隊、聯繫家長、到戶進行家訪、收集資料証明、拍照、做報告等，確保篩選公平。有一次家訪遇不上家長和申請人，如果這位同學真的合資格獲得資助，卻因一次不遇而喪失入學機會，他以後的人生道路就不會有改變。所以家訪隊伍不嫌勞苦，再出動一次，遠赴山區，終於他們遇上了駱同學。鍾慧娟説：多得同學的執着和熱忱，不然駱同學就不會獲得助學機會。人輻射人是多麼的重要和有效。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>輻射的強大效果</strong></span></p>
+<p class="p1"><span class="s1">鍾副校又舉出另外一個人輻射人的例子。今年夏天有六名希望工程班同學會理事成員被邀請到香港，出席慈善基金的籌款活動，每人回來都要寫訪港感受。其中有一篇道出學生在乘行人扶手電梯時，驚覺為什麼各人都怱怱靠右站，忙問出了什麼事？帶領他們的香港哥哥解釋，因靠右便可讓出左邊通道，讓趕時間的人士快捷前行，同學恍然大悟，愉快的上了一課。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">鍾副校説：我也是第一次知道乘電梯有這種做法，我不僅將同學的文章貼在公報板，還要在早會上告訴全校學生，輻射出去，讓他們知道有此習慣。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1"><strong>希望之源</strong></span></p>
+<p class="p1"><span class="s1">其後吳校長又談了多項出現在學生身上的問題，例如英語學習、青少年憂鬱問題越來越多、山區經濟落後，單親家庭比城市多，孩子缺乏愛，影響了成長。他感謝慈善基金對學校的支持，接着他帶領我們參觀校園。沿途綠化地帶，竪立了好幾個考入北大、清華等重點大學的卓越學生名字和相片。來到一處寫著「希望之源」的園地前，有一剛於月初所刻的石碑，記錄了慈善基金由</span><span class="s2">2011</span><span class="s1">至</span><span class="s2">2018</span><span class="s1">年間，資助了</span><span class="s2">480</span><span class="s1">人。其中首五屆三百名學生中，</span><span class="s2">98%</span><span class="s1">成功考入高等院校。</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p1"><span class="s1">筆者不其然想起那位執着我手的女孩：是的，我們這一輩都會垂垂老矣，你們就是未來希望之源，將來的社會就靠你們創建了！</span></p>
+<p class="p2">&nbsp;</p>
+<p class="p3"><span class="s3">註</span><span class="s4">1</span><span class="s3">︰樂助會「簡稱</span> <span class="s4">S.O.W.</span><span class="s3">」是</span><span class="s4">2016</span><span class="s3">年於北加州灣區成立的非牟利慈善機構。</span><span class="s4">S.O.W.</span><span class="s3">的團隊致力於在全球範圍內服務社區，以實際行動援助需要幫助的人，從而讓他們有機會認識那位愛的源頭</span> <span class="s4">&mdash; </span><span class="s3">耶穌基督。該機構設有賑災救援，長者關顧，愛心助學，貧困資助和遊學培訓五大項目，其中愛心助學項目與香港儲運慈善基金緊密合作，參與「希望工程班」助學計劃，目前已資助</span><span class="s5">6</span><span class="s3">位龍川一中「希望工程班」貧困學子。</span></p>
+<p class="p4">&nbsp;</p>
+<p class="p3"><span class="s1">註</span><span class="s6">2</span><span class="s1">︰香港儲運慈善基金隸屬香港儲蓄互助社協會</span><span class="s6">(</span><span class="s1">註</span><span class="s6">4)</span><span class="s1">轄下慈善機構。是由香港儲蓄互助社協會於</span><span class="s6">2010</span><span class="s1">年</span><span class="s6">9</span><span class="s1">月</span><span class="s6">22</span><span class="s1">日，根據香港特別行政區法例</span><span class="s6">32</span><span class="s1">章＜公司條例＞註冊成立，並獲稅務局認可為慈善機構。</span></p>
+<p class="p4">&nbsp;</p>
+<p class="p3"><span class="s1">註</span><span class="s2">3</span><span class="s1">︰希望工程班最初名為︰香港儲蓄互助社希望工程班，由</span><span class="s2">2018</span><span class="s1">年開始正名︰香港儲運慈善基金希望工程班</span><span class="s2"> (</span><span class="s1">希工班</span><span class="s2">)</span><span class="s1">。</span></p>
+<p class="p4">&nbsp;</p>
+<p class="p3"><span class="s1">註</span><span class="s6">4</span><span class="s1">︰四次探訪活動，包括︰九月新一屆希望工程班開班禮；二月同學會理事會換屆；五月高考打氣會；七月大學畢業了，重聚川中。</span></p>
+<p class="p5">&nbsp;</p>
+<p class="p3"><span class="s1">註</span><span class="s6">5</span><span class="s1">︰香港儲蓄互助社協會是國際儲蓄運動的一份子，也是世界儲蓄互助社議事會及亞洲儲蓄互助社同盟會會員。於</span><span class="s6">1966</span><span class="s1">年，由最初全港八家儲蓄互助社，為應付不斷的挑戰與繼續在香港推動儲蓄互助運動，於是成立香港儲蓄互助社協會，協助會員社發展和推廣儲蓄自助互助運動精神。</span></p>
