@@ -200,6 +200,13 @@ def text_to_md(s: str) -> str:
     return s
 
 
+# Within a <p>, drop consecutive <br/> runs to a paragraph break,
+# and single intra-sentence <br/> to a space (CJK doesn't need line breaks
+# mid-sentence). This avoids the legacy pattern of `<br/>` inserted as
+# decorative line breaks in long Chinese sentences.
+INTRA_BR_RE = re.compile(r"\s*  \n\s*")  # markdown line-break we emitted
+
+
 def render(nodes: list[Node]) -> str:
     out: list[str] = []
     for n in nodes:
@@ -216,7 +223,9 @@ def render_one(n: Node) -> str:
         return render(n.children)
 
     if tag == "br":
-        return "  \n"
+        # Marker for post-processing — single <br> becomes a soft space,
+        # double <br/><br/> becomes a real paragraph break (handled after render).
+        return "[[BR]]"
     if tag == "hr":
         return "\n\n---\n\n"
     if tag == "img":
@@ -404,20 +413,209 @@ def pre_clean(body_html: str) -> str:
     s = re.sub(r'(="(?:\.\./)+)(images/)', r'="/\2', s)
     s = re.sub(r'(="(?:\.\./)+demo/)(images|attached)/', r'="/images/', s)
 
+    # Promote inline `<strong>X：</strong>` to a heading by breaking the
+    # surrounding paragraph. This catches Weebly's pattern of labelled
+    # paragraphs that were `<p>...body<br/><strong>願景：</strong>X<br/>
+    # <strong>使命：</strong>Y</p>`.
+    s = re.sub(
+        r"<(strong|b)>\s*([^<>]{2,16})\s*[:：]\s*</\1>\s*",
+        lambda m: f"</p><h3>{m.group(2).strip()}</h3><p>",
+        s,
+        flags=re.IGNORECASE,
+    )
+
     return s
 
 
 def post_clean_md(md: str) -> str:
     """Post-pass on the rendered markdown."""
-    # Drop PayPal tracking-pixel images entirely
+    # ------------------------------------------------------------------
+    # Unwrap Weebly fake-bold FIRST — every paragraph in legacy content
+    # was wrapped in <strong> regardless of intent. If we leave them in,
+    # label promotion can't see the actual text because the line begins
+    # with `**` and most regexes exclude `*`.
+    # ------------------------------------------------------------------
+    # Collapse adjacent bold runs `**X****Y**` → `**XY**` (artefact from
+    # `<strong>X</strong><strong>Y</strong>` after parsing).
+    prev = None
+    while prev != md:
+        prev = md
+        md = re.sub(r"\*\*[ \t]*\*\*", "", md)
+
+    # Lines that are entirely `**...**` with no inner `**`: strip the
+    # surrounding bold (it was paragraph-wide fake-bold, not emphasis).
+    lines = md.split("\n")
+    out: list[str] = []
+    for raw in lines:
+        line = raw.rstrip()
+        s = line.strip()
+        if s.startswith("**") and s.endswith("**") and len(s) >= 4:
+            inner = s[2:-2]
+            if "**" not in inner:
+                indent = line[: len(line) - len(line.lstrip())]
+                out.append(indent + inner)
+                continue
+        out.append(line)
+    md = "\n".join(out)
+
+    # Strip leading/trailing bold around heading text (`## **X**` → `## X`)
+    md = re.sub(r"^(#{1,6}\s+)\*\*(.+?)\*\*\s*$", r"\1\2", md, flags=re.MULTILINE)
+    md = re.sub(r"\*\*\s*\*\*", "", md)
+
+    # ------------------------------------------------------------------
+    # Strip junk artefacts
+    # ------------------------------------------------------------------
+    # PayPal tracking pixels
     md = re.sub(r"!\[[^\]]*\]\(https?://[^)]*paypal[^)]*pixel[^)]*\)", "", md, flags=re.IGNORECASE)
     md = re.sub(r"!\[[^\]]*\]\(https?://[^)]*paypalobjects\.com/[^)]*\)", "", md, flags=re.IGNORECASE)
+    # WordPress "SaveSave" plugin artefact
+    md = re.sub(r"^SaveSave\s*$", "", md, flags=re.MULTILINE)
+    # Dead links that point to legacy CI routes we deleted
+    md = re.sub(r"\[!\[([^\]]*)\]\(([^)]+)\)\]\((?:\.\./)*signup\)", r"![\1](\2)", md)
+    md = re.sub(r"\[!\[([^\]]*)\]\(([^)]+)\)\]\(/signup\)", r"![\1](\2)", md)
+    md = re.sub(r"\[([^\]]+)\]\((?:\.\./)*(signup|login|reset)\)", r"\1", md)
+    # Trailing image-only headings: `## ![](url)`
+    md = re.sub(r"^#{1,6}\s+!\[[^\]]*\]\([^)]+\)\s*$", "", md, flags=re.MULTILINE)
+
+    # Orphan "join us" CTA images from the legacy signup flow
+    # (image of a button with no real link, after we stripped /signup)
+    md = re.sub(
+        r"^!\[[^\]]*\]\(/images/20180202/20180202215011_18216\.jpg\)\s*$",
+        "",
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Promote 【X】 bracket-style section labels to ### headings.
+    # These were used as inline section markers throughout the legacy content.
+    md = re.sub(
+        r"^【([^】\n]{2,16})】\s*(.*)$",
+        lambda m: f"### {m.group(1).strip()}\n\n{m.group(2).strip()}" if m.group(2).strip() else f"### {m.group(1).strip()}",
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Mid-paragraph 【X】 bracket: split into heading
+    md = re.sub(
+        r"([。！？\n])【([^】\n]{2,16})】",
+        lambda m: f"{m.group(1)}\n\n### {m.group(2).strip()}\n\n",
+        md,
+    )
+
+    # ------------------------------------------------------------------
+    # Promote label-style sub-headings: lines like `**資助對象:**` or
+    # `**X：**` standing alone on their own line — these were originally
+    # `<strong>X：</strong>` used as inline section markers. We promote
+    # them to `### X` (level-3) so the page gets visual structure.
+    # ------------------------------------------------------------------
+    def _promote_label(m: re.Match) -> str:
+        body = m.group(1).strip().rstrip("：:")
+        return f"### {body}"
+    # Whole-line bold ending in colon
+    md = re.sub(
+        r"^\*\*([^*\n]{1,20})[:：]\*\*\s*$",
+        _promote_label,
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Bold short label at start of paragraph (e.g. `**資助對象：** 在...`):
+    # turn into `### 資助對象\n\n在...`
+    def _split_inline_label(m: re.Match) -> str:
+        label = m.group(1).strip()
+        rest = m.group(2).lstrip()
+        return f"### {label}\n\n{rest}"
+    md = re.sub(
+        r"^\*\*([^*\n]{1,16})[:：]\*\*\s*(.+)$",
+        _split_inline_label,
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Plain-text labels at start of a paragraph: `資助對象：在...` (no bold).
+    # Only promote when the label is short Chinese (≤8 chars, no punctuation)
+    # AND the paragraph is followed by another paragraph or list.
+    def _split_plain_label(m: re.Match) -> str:
+        label = m.group(1).strip()
+        rest = m.group(2).strip()
+        # avoid common sentence-internal colons by requiring the label end
+        # with Chinese fullwidth colon `：` (vs ASCII `:`)
+        return f"### {label}\n\n{rest}"
+    md = re.sub(
+        r"^([^\n*\[\(\-]{2,8})：\s*(.{4,}?)$",
+        _split_plain_label,
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Same, but when the colon is at the END of a paragraph and the next
+    # paragraph is a list. Pattern:
+    #     資助對象：
+    #     - item
+    # Or run-together: `資助對象：- item`
+    md = re.sub(
+        r"^([^\n*\[\(\-]{2,8})：\s*\n(?=\s*[-*\d])",
+        lambda m: f"### {m.group(1).strip()}\n",
+        md,
+        flags=re.MULTILINE,
+    )
+    md = re.sub(
+        r"^([^\n*\[\(\-]{2,8})：\s*(?=[-*])",
+        lambda m: f"### {m.group(1).strip()}\n\n",
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # Mid-paragraph short label glued to a list: `...句子。資助對象：- 本人`
+    # Split into a proper heading + list. Anchor on Chinese terminal
+    # punctuation or paragraph-start to avoid mid-sentence false-positives.
+    md = re.sub(
+        r"(?<=[。！？])\s*([一-鿿]{2,8})：\s*(?=[-*])",
+        lambda m: f"\n\n### {m.group(1)}\n\n",
+        md,
+    )
+    md = re.sub(
+        r"^([一-鿿]{2,8})：\s*(?=[-*])",
+        lambda m: f"### {m.group(1)}\n\n",
+        md,
+        flags=re.MULTILINE,
+    )
+
+    # ------------------------------------------------------------------
+    # Stitch Chinese paragraphs that were broken mid-sentence: if a
+    # paragraph ends in a non-terminal punctuation (， 、 ； : or no
+    # punctuation at all) and the next paragraph is also prose (no list,
+    # heading, image, etc.), join them.
+    # ------------------------------------------------------------------
+    TERMINAL = set("。！？.!?）)」』]")
+    BLOCK_STARTS = ("#", "-", "*", "!", "[", "|", ">", "```", "1.", "2.", "3.")
+    blocks = re.split(r"\n{2,}", md)
+    stitched: list[str] = []
+    i = 0
+    while i < len(blocks):
+        cur = blocks[i].rstrip()
+        if i + 1 < len(blocks):
+            nxt = blocks[i + 1].lstrip()
+            if (
+                cur
+                and nxt
+                and not any(nxt.startswith(p) for p in BLOCK_STARTS)
+                and not any(cur.startswith(p) for p in BLOCK_STARTS)
+                and cur[-1] not in TERMINAL
+                and not cur.endswith("**")  # don't stitch into bold ending
+            ):
+                blocks[i + 1] = cur + nxt
+                i += 1
+                continue
+        stitched.append(cur)
+        i += 1
+    md = "\n\n".join(stitched)
     # Collapse adjacent bold runs that came from `<strong>X</strong><strong>Y</strong>`
     # → `**X****Y**` → `**XY**`. Repeat until stable.
     prev = None
     while prev != md:
         prev = md
-        md = re.sub(r"\*\*\s*\*\*", "", md)
+        md = re.sub(r"\*\*[ \t]*\*\*", "", md)
 
     # Unwrap paragraph-wide bold: lines that are ENTIRELY `**...**` with no inner `**`.
     lines = md.split("\n")
@@ -455,6 +653,15 @@ def clean_body(body_html: str) -> str:
     cleaned = cleanup(parser.root)
     md = render(cleaned)
     md = html.unescape(md)
+
+    # Resolve [[BR]] markers:
+    # - 2+ consecutive [[BR]] = paragraph break (\n\n)
+    # - 1 [[BR]] inside a paragraph: drop (CJK doesn't need decorative breaks)
+    # IMPORTANT: only consume horizontal whitespace (not \n), so we don't
+    # accidentally swallow paragraph separators around the marker.
+    md = re.sub(r"(\[\[BR\]\][ \t]*){2,}", "\n\n", md)
+    md = re.sub(r"[ \t]*\[\[BR\]\][ \t]*", "", md)
+
     md = post_clean_md(md)
     return md
 
@@ -467,6 +674,12 @@ def process_file(p: Path) -> None:
     if end == -1:
         return
     front = text[: end + 4]      # includes the closing '---'
+
+    # Respect the hand-edited marker — never re-clean files the maintainer
+    # has reworked manually.
+    if "# extract-skip: true" in front:
+        return
+
     body = text[end + 4 :].lstrip("\n")
     cleaned = clean_body(body)
     if not cleaned.strip():

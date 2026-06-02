@@ -142,10 +142,21 @@ def clean_html(s: str) -> str:
     return s.strip()
 
 
+HAND_EDITED_MARKER = "# extract-skip: true"
+
+
 def write_md(out_dir: Path, slug: str, title: str, group: str, order: int,
              content: str, lang: str, banner: str) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
-    # YAML frontmatter
+
+    # Respect a hand-edited marker — never clobber files the maintainer
+    # has reworked manually.
+    target = out_dir.joinpath(f"{slug}.md")
+    if target.exists():
+        head = target.read_text(encoding="utf-8")
+        if HAND_EDITED_MARKER in head:
+            return
+
     fm_lines = ["---"]
     fm_lines.append(f'title: "{title}"')
     fm_lines.append(f"group: {group}")
@@ -154,7 +165,7 @@ def write_md(out_dir: Path, slug: str, title: str, group: str, order: int,
         fm_lines.append(f'banner: "{banner}"')
     fm_lines.append(f'lang: {lang}')
     fm_lines.append("---\n")
-    out_dir.joinpath(f"{slug}.md").write_text(
+    target.write_text(
         "\n".join(fm_lines) + "\n" + content + "\n",
         encoding="utf-8",
     )

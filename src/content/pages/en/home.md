@@ -6,11 +6,15 @@ lang: en
 summary: "Practical action so the world feels the love of God."
 ---
 
-About Us:
+### About Us
 
 ![](/images/20180213/20180213053955_13683.jpg)
 
-S.O.W., or Serving Others Worldwide, is a nonprofit organization incorporated in the San Francisco Bay Area in 2016. The team of S.O.W. strives to serve our communities by providing programs, projects or tangible assistance to meet their economic, physical, mental and spiritual needs on local and global level.Vision:  Let the most needy see the love of God through our actions.Mission:  To serve our communities worldwide by providing programs, projects or tangible assistance to meet their economic, physical, mental and spiritual needs.
+S.O.W., or Serving Others Worldwide, is a nonprofit organization incorporated in the San Francisco Bay Area in 2016. The team of S.O.W. strives to serve our communities by providing programs, projects or tangible assistance to meet their economic, physical, mental and spiritual needs on local and global level.
+
+Vision:  Let the most needy see the love of God through our actions.
+
+Mission:  To serve our communities worldwide by providing programs, projects or tangible assistance to meet their economic, physical, mental and spiritual needs.
 
 ---
 
@@ -18,9 +22,7 @@ S.O.W., or Serving Others Worldwide, is a nonprofit organization incorporated in
 
 ![Disaster Relief](/images/homepage/2.jpg)
 
-**Disaster Relief
- S.O.W. Disaster Relief aims to unite all churches together to provide relief efforts and resources to victims and the affected people, assisting them in reconstruction.
- When a disaster strikes, S.O.W. will integrate the resources of all churches and Christians, including personnel and tangible supplies, to work with local churches in the affected areas to play an active role in disaster relief in their communities and to exalt the Holy Cross and glorify the Lord’s name.**
+Disaster ReliefS.O.W. Disaster Relief aims to unite all churches together to provide relief efforts and resources to victims and the affected people, assisting them in reconstruction.When a disaster strikes, S.O.W. will integrate the resources of all churches and Christians, including personnel and tangible supplies, to work with local churches in the affected areas to play an active role in disaster relief in their communities and to exalt the Holy Cross and glorify the Lord’s name.
 
 ---
 
@@ -44,7 +46,11 @@ Study – Abroad ToursS.O.W. plans and arranges Holy Land tours, spiritual retre
 
 ![Scholarship](/images/homepage/3.jpg)
 
-ScholarshipS.O.W. created a scholarship program to allow each charitable donations reach their target students fully and directly.Scholarship Program aims at caring for and assisting poor students, who maintain a certain level of academic grades, by subsidizing for their tuition fees, room and board, textbooks, and other miscellaneous fees to help them complete their studies and degree programs.The scholarship recipients will have an opportunity to receive education and leave poverty. S.O.W. will continue to follow up and monitor the progress of the program as well as arrange trips for donors to visit the schools and get to know each scholarship recipients.
+ScholarshipS.O.W. created a scholarship program to allow each charitable donations reach their target students fully and directly.
+
+Scholarship Program aims at caring for and assisting poor students, who maintain a certain level of academic grades, by subsidizing for their tuition fees, room and board, textbooks, and other miscellaneous fees to help them complete their studies and degree programs.
+
+The scholarship recipients will have an opportunity to receive education and leave poverty. S.O.W. will continue to follow up and monitor the progress of the program as well as arrange trips for donors to visit the schools and get to know each scholarship recipients.
 
 ---
 
@@ -60,4 +66,8 @@ GrantsUse practical actions to help those who need it the most. S.O.W. Grants pr
 
 ![Fund Raising](/images/homepage/9.jpg)
 
-Fund RaisingAidan, a 7-year-old boy, has osteosarcoma, a rare cancer that is currently undergoing a one-year treatment in the United States. Aidan's mother wrote on Facebook that the money they brought was only enough to pay for the first three months of chemotherapy, and the remaining nine months of medical expenses amounted to 3 to 4 million Hong Kong dollars (US$500,000), hoping to raise funds to "save a precious life."捐款：[link](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VKRSYH79HVXQN&source=url)
+Fund RaisingAidan, a 7-year-old boy, has osteosarcoma, a rare cancer that is currently undergoing a one-year treatment in the United States. Aidan's mother wrote on Facebook that the money they brought was only enough to pay for the first three months of chemotherapy, and the remaining nine months of medical expenses amounted to 3 to 4 million Hong Kong dollars (US$500,000), hoping to raise funds to "save a precious life."
+
+### 捐款
+
+[link](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VKRSYH79HVXQN&source=url)

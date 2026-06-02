@@ -40,19 +40,19 @@ summary: "During the COVID-19 pandemic, supplying protective gear and economic r
 | --- | --- |
 | Kaiser Permanente - **Emergency Department** South Francisco | KN-95 Protective Mask 500pcs |
 | Kaiser Permanente- South Francisco | KN-95 Protective Mask 500pcs |
-| Hospice By The Bay (with also distibute to a few hospitals including    **Kaiser San Jose with more than 100 patients diagnosed with COVID-19**) | Mask 3000pcs |
+| Hospice By The Bay (with also distibute to a few hospitals including **Kaiser San Jose with more than 100 patients diagnosed with COVID-19**) | Mask 3000pcs |
 | Zucker berg San Francisco General Hospital | KN-95 Protective Mask 500pcs |
 | Kaiser Permanente- Walnut Creek | KN-95 Protective Mask 500pcs |
 | Emanate Health Foundation | KN-95 Protective Mask 300pcs |
 | Dr. Chun-Cheung Richard Chen | KN-95 Protective Mask 150pcs |
-| Manford Multicare Center:    Dr. Yelena Faynzilbert D.O | KN-95 Protective Mask 300pcs |
-| St. Johnland Nursing Center:    Dr. Yelena Faynzilbert D.O | KN-95 Protective Mask 300pcs |
+| Manford Multicare Center: Dr. Yelena Faynzilbert D.O | KN-95 Protective Mask 300pcs |
+| St. Johnland Nursing Center: Dr. Yelena Faynzilbert D.O | KN-95 Protective Mask 300pcs |
 | Dr. Alexandera Meis | KN-95 Protective Mask 300pcs |
 | Dr. Charles Martinez | KN-95 Protective Mask 300pcs |
 | Dr. Rakhee Patel | KN-95 Protective Mask 300pcs |
-| Department of Emergency Medicine:   Celine Thum MD and Joshua Sclair | KN-95 Protective Mask 300pcs |
+| Department of Emergency Medicine:Celine Thum MD and Joshua Sclair | KN-95 Protective Mask 300pcs |
 | Dr. Jagruit Bhakta | KN-95 Protective Mask 300pcs |
-| AFC urgent Care:   Dr. Robert Levy | KN-95 Protective Mask 300pcs |
+| AFC urgent Care:Dr. Robert Levy | KN-95 Protective Mask 300pcs |
 | Dr. Pengfei Jiang | KN-95 Protective Mask 300pcs |
 | Dr. Jennifer Wen | KN-95 Protective Mask 300pcs |
 | Memorial Hospital West Fl | KN-95 Protective Mask 500pcs |

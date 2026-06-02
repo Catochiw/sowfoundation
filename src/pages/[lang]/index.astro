@@ -1,7 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Hero from "@components/Hero.astro";
 import HomeSlider from "@components/HomeSlider.astro";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import { allLocales, type Lang, t } from "@i18n/ui";
 import { localizedHref } from "@data/nav";
 
@@ -13,40 +14,31 @@ const { lang } = Astro.params as { lang: Lang };
 
 const all = await getCollection("pages", ({ data }) => data.lang === lang);
 
-const home = all.find((p) => p.data.group === "home");
 const programs = all
   .filter((p) => p.data.group === "programs")
   .sort((a, b) => a.data.order - b.data.order);
 const tours = (await getCollection("tours", ({ data }) => data.lang === lang)).sort(
   (a, b) => a.data.order - b.data.order,
 );
-
-const HomeBody = home ? (await render(home)).Content : null;
 ---
 
 <Layout lang={lang} pathWithoutLang="">
-  <!-- Hero slider -->
-  <HomeSlider lang={lang} />
+  <!-- Centred brand hero -->
+  <Hero lang={lang} />
 
-  <!-- Mission statement -->
-  <section class="section">
-    <div class="container-prose text-center">
-      <p class="text-sm uppercase tracking-[0.16em] text-[color:var(--color-brand-600)] font-medium">
-        {t(lang, "home.hero.eyebrow")}
-      </p>
-      <h1 class="mt-4 whitespace-pre-line">{t(lang, "home.hero.title")}</h1>
-      <p class="mt-6 text-lg text-[color:var(--color-ink-500)] mx-auto max-w-2xl">
-        {t(lang, "home.hero.subtitle")}
-      </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
-          {t(lang, "home.cta.donate")}
-        </a>
-        <a href={localizedHref(lang, "/about/org")} class="btn btn-secondary">
-          {t(lang, "home.cta.learn")}
-        </a>
-      </div>
+  <!-- Featured highlights (slider) -->
+  <section id="explore" class="section-tight" aria-labelledby="featured-heading">
+    <div class="container-wide">
+      <header class="mb-8 flex items-end justify-between gap-4">
+        <h2 id="featured-heading" class="text-2xl sm:text-3xl">
+          {lang === "zh" ? "近期事工" : "Featured"}
+        </h2>
+        <p class="hidden sm:block text-sm text-[color:var(--color-ink-500)]">
+          {lang === "zh" ? "最近的行程與項目" : "What's happening now"}
+        </p>
+      </header>
     </div>
+    <HomeSlider lang={lang} />
   </section>
 
   <!-- Programs grid -->
@@ -145,12 +137,4 @@ const HomeBody = home ? (await render(home)).Content : null;
     </div>
   </section>
 
-  <!-- Optional: rendered home.md content -->
-  {HomeBody && (
-    <section class="section-tight">
-      <article class="container-prose prose-content">
-        <HomeBody />
-      </article>
-    </section>
-  )}
 </Layout>

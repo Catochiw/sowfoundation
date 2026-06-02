@@ -9,9 +9,9 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section class="relative bg-[color:var(--color-ink-50)] pb-0">
+<div class="relative">
   <div
-    class="embla relative w-full overflow-hidden"
+    class="embla relative w-full overflow-hidden rounded-3xl mx-auto max-w-[calc(100vw-2.5rem)] lg:max-w-[1200px]"
     aria-roledescription="carousel"
     aria-label="Highlights"
   >
@@ -88,7 +88,7 @@ const { lang } = Astro.props;
       ))}
     </div>
   </div>
-</section>
+</div>
 
 <script>
   import EmblaCarousel from "embla-carousel";

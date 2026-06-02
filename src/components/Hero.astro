@@ -1,0 +1,170 @@
+---
+import type { Lang } from "@i18n/ui";
+import { t } from "@i18n/ui";
+import { localizedHref } from "@data/nav";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <a href={`/${lang}`} class="hero__mark" aria-label={t(lang, "site.name")}>
+      <img src="/sow-logo.png" alt="" width="500" height="206" />
+    </a>
+
+    <p class="hero__eyebrow">{t(lang, "home.hero.eyebrow")}</p>
+
+    <h1 class="hero__title">{t(lang, "home.hero.title")}</h1>
+
+    <p class="hero__subtitle">{t(lang, "home.hero.subtitle")}</p>
+
+    <div class="hero__cta">
+      <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
+        {t(lang, "home.cta.donate")}
+      </a>
+      <a href={localizedHref(lang, "/about/org")} class="btn btn-secondary">
+        {t(lang, "home.cta.learn")}
+      </a>
+    </div>
+
+    <a href="#explore" class="hero__scroll" aria-label="Scroll">
+      <span></span>
+      <svg viewBox="0 0 16 16" class="size-4" fill="none" aria-hidden="true">
+        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: clamp(640px, 92vh, 920px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Soft, layered, off-white background — Apple-style "atmosphere".
+     Two radial gradients in brand-adjacent hues create depth without
+     dominating the content. */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 80% at 80% 0%, color-mix(in oklab, var(--color-brand-500) 18%, transparent), transparent 70%),
+      radial-gradient(50% 70% at 0% 100%, color-mix(in oklab, var(--color-warm-600) 12%, transparent), transparent 70%),
+      linear-gradient(180deg, #ffffff 0%, var(--color-ink-50) 100%);
+  }
+  .hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(60% 60% at 50% 50%, #000 60%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    width: 100%;
+    max-width: 920px;
+    margin-inline: auto;
+    padding: clamp(2rem, 6vw, 4.5rem) 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    animation: fade-up 700ms ease both;
+  }
+
+  .hero__mark {
+    display: inline-flex;
+    margin-bottom: 0.75rem;
+    transition: transform 320ms ease;
+  }
+  .hero__mark:hover { transform: scale(1.02); }
+  .hero__mark img {
+    width: clamp(220px, 32vw, 320px);
+    height: auto;
+    filter: drop-shadow(0 6px 14px rgba(10, 125, 143, 0.18));
+  }
+
+  .hero__eyebrow {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-weight: 600;
+    color: var(--color-brand-700);
+    margin: 0;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 5.5vw + 0.5rem, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-ink-900);
+    white-space: pre-line;
+    text-wrap: balance;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(1.0625rem, 1.2vw + 0.7rem, 1.375rem);
+    line-height: 1.55;
+    color: var(--color-ink-500);
+    max-width: 640px;
+    margin: 0.5rem 0 0;
+    text-wrap: pretty;
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-ink-500);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: bob 2.2s ease-in-out infinite;
+    opacity: 0.7;
+    transition: opacity 200ms ease;
+  }
+  .hero__scroll:hover { opacity: 1; color: var(--color-ink-900); }
+  .hero__scroll span {
+    display: block;
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(180deg, transparent, currentColor);
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__inner { animation: none; }
+    .hero__scroll { animation: none; }
+  }
+</style>

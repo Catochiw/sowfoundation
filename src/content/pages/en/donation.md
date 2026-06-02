@@ -1,4 +1,5 @@
 ---
+# extract-skip: true
 title: "Donate"
 group: donation
 order: 0
@@ -17,7 +18,7 @@ S.O.W. is a volunteer-led nonprofit. We have no paid staff, so **100% of your gi
 - **Scholarship** — one-to-one student sponsorships
 - **Holy Land Tours** — volunteer-led pilgrimages and field studies
 
-Every gift receives an IRS-recognized tax-deductible receipt.
+Every gift receives an IRS-recognized tax-deductible receipt. Federal Tax ID: 81-3947479.
 
 ## Other ways to give
 
