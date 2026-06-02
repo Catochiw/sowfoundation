@@ -36,56 +36,60 @@
   --color-error: #c93a3a;
 }
 
-/* Base resets ============================================================ */
-html {
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-}
+/* Base resets ============================================================
+   IMPORTANT: these MUST live inside @layer base, otherwise unlayered styles
+   would always beat @layer components rules and our component classes
+   (.btn-primary, etc.) would lose their colors. */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--color-ink-900);
-  background: var(--color-white);
-  line-height: 1.6;
-  font-feature-settings: "kern", "liga", "calt", "ss01";
-}
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink-900);
+    background: var(--color-white);
+    line-height: 1.6;
+    font-feature-settings: "kern", "liga", "calt", "ss01";
+  }
 
-::selection {
-  background: color-mix(in oklab, var(--color-brand-600) 25%, transparent);
-  color: var(--color-ink-900);
-}
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand-600) 25%, transparent);
+    color: var(--color-ink-900);
+  }
 
-/* Typography defaults ===================================================== */
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
-  color: var(--color-ink-900);
-  font-weight: 600;
-  line-height: 1.12;
-}
+  /* Typography defaults */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--color-ink-900);
+    font-weight: 600;
+    line-height: 1.12;
+  }
 
-h1 { font-size: clamp(2.25rem, 4vw + 1rem, 4rem); }
-h2 { font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem); }
-h3 { font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem); }
-h4 { font-size: 1.125rem; }
+  h1 { font-size: clamp(2.25rem, 4vw + 1rem, 4rem); }
+  h2 { font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem); }
+  h3 { font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem); }
+  h4 { font-size: 1.125rem; }
 
-p, li { color: var(--color-ink-700); }
+  p, li { color: var(--color-ink-700); }
 
-a {
-  color: var(--color-brand-600);
-  text-decoration: none;
-  transition: color 150ms ease;
-}
-a:hover { color: var(--color-brand-700); }
+  a {
+    color: var(--color-brand-600);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  a:hover { color: var(--color-brand-700); }
 
-/* Focus ================================================================== */
-:focus-visible {
-  outline: 2px solid var(--color-brand-600);
-  outline-offset: 3px;
-  border-radius: 4px;
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* Utility primitives ====================================================== */
@@ -105,41 +109,49 @@ a:hover { color: var(--color-brand-700); }
   padding-inline: 1.25rem;
 }
 
-@utility btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  border-radius: 980px;        /* Apple-style pill */
-  font-weight: 500;
-  font-size: 0.95rem;
-  line-height: 1;
-  transition: all 180ms ease;
-  white-space: nowrap;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-@utility btn-primary {
-  background: var(--color-brand-600);
-  color: var(--color-white);
-}
-@utility btn-primary-hover {
-  background: var(--color-brand-700);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--color-brand-600) 50%, transparent);
-}
-@utility btn-secondary {
-  background: var(--color-white);
-  color: var(--color-ink-900);
-  border-color: var(--color-ink-300);
-}
-@utility btn-secondary-hover {
-  border-color: var(--color-ink-500);
-}
-@utility btn-ghost {
-  background: transparent;
-  color: var(--color-ink-900);
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 980px;        /* Apple-style pill */
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: all 180ms ease;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand-600);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-700);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--color-brand-600) 50%, transparent);
+  }
+
+  .btn-secondary {
+    background-color: #ffffff;
+    color: var(--color-ink-900);
+    border-color: var(--color-ink-300);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-ink-500);
+    color: var(--color-ink-900);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink-900);
+  }
 }
 
 /* Pre-styled, longform "prose" content ==================================== */

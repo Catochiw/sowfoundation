@@ -39,7 +39,7 @@ const tourEntries = (
         </h2>
         <div class="grid gap-6 md:grid-cols-2">
           {tourEntries.map((tour) => {
-            const slug = tour.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+            const slug = tour.id.split("/").pop() ?? "";
             return (
               <a
                 href={localizedHref(lang, `/tours/${slug}`)}
@@ -84,7 +84,7 @@ const tourEntries = (
         </h2>
         <div class="grid gap-6 md:grid-cols-2">
           {tourPages.map((p) => {
-            const slug = p.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+            const slug = p.id.split("/").pop() ?? "";
             return (
               <a href={localizedHref(lang, `/tours/${slug}`)} class="card-soft block">
                 <h3>{p.data.title}</h3>

@@ -26,7 +26,7 @@ const programs = (
     <div class="container-wide">
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {programs.map((p) => {
-          const slug = p.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+          const slug = p.id.split("/").pop() ?? "";
           return (
             <a href={localizedHref(lang, `/programs/${slug}`)} class="card-soft block group">
               <h3 class="text-xl group-hover:text-[color:var(--color-brand-700)] transition-colors">

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   for (const lang of allLocales) {
     const pages = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "programs");
     for (const page of pages) {
-      const slug = page.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+      const slug = page.id.split("/").pop() ?? "";
       paths.push({ params: { lang, slug } });
     }
   }
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
 const { lang, slug } = Astro.params as { lang: Lang; slug: string };
 const all = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "programs");
-const entry = all.find((p) => p.id.endsWith(`/${slug}.md`) || p.id.endsWith(`${slug}.md`));
+const entry = all.find((p) => p.id === `${lang}/${slug}` || p.id.endsWith(`/${slug}`));
 if (!entry) return new Response("Not found", { status: 404 });
 const { Content } = await render(entry);
 ---

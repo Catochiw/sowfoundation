@@ -1,7 +1,7 @@
 ---
 import type { Lang } from "@i18n/ui";
 import { t } from "@i18n/ui";
-import { paypalButtons, checkInfo } from "@data/donation";
+import { paypalButtons, checkInfo, stockInfo, contactInfo } from "@data/donation";
 
 interface Props {
   lang: Lang;
@@ -32,14 +32,13 @@ const { lang } = Astro.props;
             action="https://www.paypal.com/cgi-bin/webscr"
             method="post"
             target="_blank"
-            rel="noopener"
             class="mt-4"
           >
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value={b.buttonId} />
             <button
               type="submit"
-              class="btn btn-primary hover:btn-primary-hover w-full sm:w-auto"
+              class="btn btn-primary w-full sm:w-auto"
             >
               <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
                 <path d="M7.4 21.5h-3a.6.6 0 0 1-.6-.7L6.6 3.4a1 1 0 0 1 1-.9h6.7c2.6 0 4.5.7 5.5 2 .9 1.2 1.1 2.8.7 4.7-.7 3.7-3.1 5.5-7 5.5h-2c-.6 0-1 .4-1.1 1L9.4 21a.6.6 0 0 1-.7.5H7.4z" />
@@ -76,6 +75,26 @@ const { lang } = Astro.props;
       </div>
     </dl>
   </div>
+</div>
+
+<div class="mt-8 card-soft">
+  <h3 class="text-xl">{t(lang, "donate.stock.title")}</h3>
+  <p class="mt-2 text-sm text-[color:var(--color-ink-500)]">
+    {t(lang, "donate.stock.intro")}
+  </p>
+  <dl class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
+    <div>
+      <dt class="text-[color:var(--color-ink-500)]">{t(lang, "donate.stock.brokerage")}</dt>
+      <dd class="mt-1 text-[color:var(--color-ink-900)] font-medium">{stockInfo.brokerage}</dd>
+    </div>
+    <div>
+      <dt class="text-[color:var(--color-ink-500)]">{t(lang, "donate.stock.account")}</dt>
+      <dd class="mt-1 text-[color:var(--color-ink-900)] font-mono font-medium">{stockInfo.accountNumber}</dd>
+    </div>
+  </dl>
+  <p class="mt-4 text-xs text-[color:var(--color-ink-500)]">
+    {t(lang, "donate.stock.note")} <a href={`mailto:${contactInfo.email}`} class="underline">{contactInfo.email}</a>
+  </p>
 </div>
 
 <div class="mt-8 rounded-2xl bg-[color:var(--color-brand-50)] border border-[color:var(--color-brand-500)]/30 p-5">

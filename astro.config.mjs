@@ -33,7 +33,9 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    // Cast around a vite version-mismatch between Astro's bundled vite
+    // and @tailwindcss/vite's peer; runtime is fine.
+    plugins: [/** @type {any} */ (tailwindcss())],
   },
   build: {
     inlineStylesheets: "auto",

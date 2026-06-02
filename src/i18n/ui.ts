@@ -77,6 +77,11 @@ export const ui = {
     "donate.check.title": "郵寄支票",
     "donate.check.payee": "支票抬頭",
     "donate.check.mail_to": "請寄往",
+    "donate.stock.title": "股票/證券捐贈",
+    "donate.stock.intro": "捐贈增值股票可獲全額抵稅,並免去資本利得稅。",
+    "donate.stock.brokerage": "券商",
+    "donate.stock.account": "賬戶號碼",
+    "donate.stock.note": "DTC 編號與接收指示請聯繫我們索取。",
     "donate.tax.note": "樂助會為美國國稅局認可之 501(c)(3) 公益機構,奉獻可作為抵稅之用。",
 
     "footer.copyright": "© {year} S.O.W. - Serving Others Worldwide. 保留所有權利。",
@@ -154,6 +159,12 @@ export const ui = {
     "donate.check.title": "Mail a check",
     "donate.check.payee": "Payable to",
     "donate.check.mail_to": "Mail to",
+    "donate.stock.title": "Stock / securities",
+    "donate.stock.intro":
+      "Gifting appreciated securities lets you deduct full fair market value and avoid capital-gains tax.",
+    "donate.stock.brokerage": "Brokerage",
+    "donate.stock.account": "Account number",
+    "donate.stock.note": "Contact us for DTC number and transfer instructions.",
     "donate.tax.note":
       "S.O.W. is a 501(c)(3) tax-exempt charitable organization. Donations are tax-deductible to the fullest extent of the law.",
 

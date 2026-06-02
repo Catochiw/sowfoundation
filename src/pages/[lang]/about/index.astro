@@ -24,7 +24,7 @@ const aboutPages = (await getCollection("pages", ({ data }) => data.lang === lan
     <div class="container-wide">
       <div class="grid gap-6 md:grid-cols-2">
         {aboutPages.map((p) => {
-          const slug = p.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+          const slug = p.id.split("/").pop() ?? "";
           return (
             <a href={localizedHref(lang, `/about/${slug}`)} class="card-soft block">
               <h3>{p.data.title}</h3>

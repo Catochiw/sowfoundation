@@ -39,10 +39,10 @@ const HomeBody = home ? (await render(home)).Content : null;
         {t(lang, "home.hero.subtitle")}
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href={localizedHref(lang, "/donate")} class="btn btn-primary hover:btn-primary-hover">
+        <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
           {t(lang, "home.cta.donate")}
         </a>
-        <a href={localizedHref(lang, "/about/org")} class="btn btn-secondary hover:btn-secondary-hover">
+        <a href={localizedHref(lang, "/about/org")} class="btn btn-secondary">
           {t(lang, "home.cta.learn")}
         </a>
       </div>
@@ -62,7 +62,7 @@ const HomeBody = home ? (await render(home)).Content : null;
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {programs.map((p) => (
           <a
-            href={localizedHref(lang, `/programs/${p.id.split("/").pop()?.replace(/\.md$/, "")}`)}
+            href={localizedHref(lang, `/programs/${p.id.split("/").pop()}`)}
             class="card-soft block group"
           >
             <h3 class="text-xl group-hover:text-[color:var(--color-brand-700)] transition-colors">
@@ -93,7 +93,7 @@ const HomeBody = home ? (await render(home)).Content : null;
 
         <div class="grid gap-6 md:grid-cols-2">
           {tours.map((tour) => {
-            const slug = tour.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
+            const slug = tour.id.split("/").pop() ?? "";
             return (
               <a
                 href={localizedHref(lang, `/tours/${slug}`)}
@@ -138,7 +138,7 @@ const HomeBody = home ? (await render(home)).Content : null;
         {t(lang, "home.donate.subtitle")}
       </p>
       <div class="mt-7">
-        <a href={localizedHref(lang, "/donate")} class="btn btn-primary hover:btn-primary-hover">
+        <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
           {t(lang, "nav.donate")}
         </a>
       </div>

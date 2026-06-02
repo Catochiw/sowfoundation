@@ -120,17 +120,13 @@ def clean_html(s: str) -> str:
         else:
             s = re.sub(pat, "", s, flags=re.IGNORECASE)
 
-    # Rewrite image URLs:
-    # https://www.sowfoundation.org/attached/image/xxx/yyy.jpg -> /images/xxx/yyy.jpg
-    # /sowsys/attached/image/xxx/yyy.jpg -> /images/xxx/yyy.jpg
-    # /attached/image/xxx/yyy.jpg -> /images/xxx/yyy.jpg
-    s = re.sub(
-        r'https?://(?:www\.)?sowfoundation\.org/attached/image/',
-        "/images/",
-        s,
-    )
+    # Rewrite image URLs — coerce every legacy path to /images/* or /images/homepage/*
+    s = re.sub(r"https?://(?:www\.)?sowfoundation\.org/", "/", s)
+    s = re.sub(r"/(?:demo/)?assets/images/homepage/", "/images/homepage/", s)
+    s = re.sub(r"/(?:demo/)?(?:sowsys/)?attached/image/", "/images/", s)
     s = re.sub(r"/sowsys/attached/image/", "/images/", s)
-    s = re.sub(r"/attached/image/", "/images/", s)
+    # Relative paths "../../images/..." or "../images/..."
+    s = re.sub(r'(["\'(])(?:\.\./)+images/', r"\1/images/", s)
 
     # Legacy weebly upload URLs (some pages reference these):
     # http://sowfoundation.org/uploads/1/0/4/4/104496423/xxx.jpg -> leave a TODO
@@ -190,14 +186,11 @@ def main() -> int:
             continue
         meta = SLUG_MAP[old_slug]
         banner = mysql_unescape(banner_raw)
-        # Rewrite banner URL too
+        # Rewrite banner URL — coerce all legacy paths to /images/*
         if banner:
-            banner = re.sub(
-                r"https?://(?:www\.)?sowfoundation\.org/attached/image/",
-                "/images/",
-                banner,
-            )
-            banner = re.sub(r"^/attached/image/", "/images/", banner)
+            banner = re.sub(r"https?://(?:www\.)?sowfoundation\.org/", "/", banner)
+            banner = re.sub(r"^/(?:demo/)?(?:sowsys/)?attached/image/", "/images/", banner)
+            banner = re.sub(r"^/(?:demo/)?assets/images/homepage/", "/images/homepage/", banner)
 
         content_en = clean_html(mysql_unescape(content_en_raw))
         content_zh = clean_html(mysql_unescape(content_zh_raw))

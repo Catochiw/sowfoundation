@@ -58,7 +58,7 @@ const year = new Date().getFullYear();
         <address class="not-italic text-sm space-y-1.5 text-[color:var(--color-ink-700)]">
           <div>{contactInfo.address}</div>
           <div><a href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`} class="hover:underline">{contactInfo.phone}</a></div>
-          <div><a href={`mailto:${contactInfo.email}`} class="hover:underline">{contactInfo.email}</a></div>
+          <div><a href={`mailto:${contactInfo.emailContact}`} class="hover:underline">{contactInfo.emailContact}</a></div>
         </address>
       </div>
     </div>

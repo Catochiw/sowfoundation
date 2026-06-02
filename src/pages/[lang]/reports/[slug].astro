@@ -6,16 +6,19 @@ import { allLocales, type Lang, t } from "@i18n/ui";
 
 export async function getStaticPaths() {
   const paths: { params: { lang: Lang; slug: string } }[] = [];
+  const seen = new Set<string>();
   for (const lang of allLocales) {
     const fromPages = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "reports");
     for (const page of fromPages) {
-      const slug = page.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
-      paths.push({ params: { lang, slug } });
+      const slug = page.id.split("/").pop() ?? "";
+      const key = `${lang}/${slug}`;
+      if (!seen.has(key)) { seen.add(key); paths.push({ params: { lang, slug } }); }
     }
     const fromReports = await getCollection("reports", ({ data }) => data.lang === lang);
     for (const r of fromReports) {
-      const slug = r.id.split("/").pop()?.replace(/\.md$/, "") ?? "";
-      paths.push({ params: { lang, slug } });
+      const slug = r.id.split("/").pop() ?? "";
+      const key = `${lang}/${slug}`;
+      if (!seen.has(key)) { seen.add(key); paths.push({ params: { lang, slug } }); }
     }
   }
   return paths;
@@ -27,8 +30,8 @@ const pagesReports = await getCollection("pages", ({ data }) => data.lang === la
 const reports = await getCollection("reports", ({ data }) => data.lang === lang);
 
 const entry =
-  pagesReports.find((p) => p.id.endsWith(`/${slug}.md`) || p.id.endsWith(`${slug}.md`)) ??
-  reports.find((p) => p.id.endsWith(`/${slug}.md`) || p.id.endsWith(`${slug}.md`));
+  pagesReports.find((p) => p.id === `${lang}/${slug}` || p.id.endsWith(`/${slug}`)) ??
+  reports.find((p) => p.id === `${lang}/${slug}` || p.id.endsWith(`/${slug}`));
 
 if (!entry) return new Response("Not found", { status: 404 });
 

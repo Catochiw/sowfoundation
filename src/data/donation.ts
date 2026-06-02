@@ -36,8 +36,21 @@ export const checkInfo = {
   ],
 };
 
+/**
+ * Brokerage / stock donation. SOW's Charles Schwab account allows donors to
+ * transfer appreciated securities for an immediate tax deduction at fair market
+ * value plus avoid capital-gains tax. Verified from the legacy donation page.
+ */
+export const stockInfo = {
+  brokerage: "Charles Schwab",
+  accountNumber: "4507-8379",
+  // DTC + receiving instructions should be requested from SOW directly to
+  // avoid putting actionable wiring info on a public page.
+};
+
 export const contactInfo = {
   address: "6280 W. Las Positas Blvd., Suite 203, Pleasanton, CA 94588",
   phone: "(510) 256-5156",
-  email: "Beatrice.Chan@SOWFoundation.org",
+  email: "info@sowfoundation.org",
+  emailContact: "Beatrice.Chan@SOWFoundation.org",
 };

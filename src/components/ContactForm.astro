@@ -73,7 +73,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   <div class="flex items-center gap-4">
     <button
       type="submit"
-      class="btn btn-primary hover:btn-primary-hover"
+      class="btn btn-primary"
       data-cf-submit
     >
       <span data-cf-label>{t(lang, "contact.form.submit")}</span>
@@ -96,7 +96,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   ></script>
 )}
 
-<script define:vars={{ messages: {
+<script is:inline define:vars={{ messages: {
   submit: t(lang, "contact.form.submit"),
   submitting: t(lang, "contact.form.submitting"),
   success: t(lang, "contact.form.success"),

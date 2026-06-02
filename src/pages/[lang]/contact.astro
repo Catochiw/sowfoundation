@@ -48,8 +48,8 @@ const { lang } = Astro.params as { lang: Lang };
               {t(lang, "contact.email")}
             </h4>
             <p class="mt-2">
-              <a href={`mailto:${contactInfo.email}`} class="text-[color:var(--color-ink-900)] hover:underline">
-                {contactInfo.email}
+              <a href={`mailto:${contactInfo.emailContact}`} class="text-[color:var(--color-ink-900)] hover:underline">
+                {contactInfo.emailContact}
               </a>
             </p>
           </div>
