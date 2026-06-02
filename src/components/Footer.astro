@@ -11,18 +11,18 @@ const { lang } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[color:var(--color-ink-300)] bg-[color:var(--color-ink-50)]">
-  <div class="container-wide py-12">
+<footer class="border-t border-[color:var(--color-rule)] bg-[color:var(--color-canvas)]">
+  <div class="container-wide py-14">
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div class="space-y-3">
         <a
           href={`/${lang}`}
-          class="flex items-center gap-2 font-semibold text-[color:var(--color-ink-900)] hover:text-[color:var(--color-ink-900)]"
+          class="flex items-center gap-2.5 text-[color:var(--color-ink)] hover:text-[color:var(--color-ink)]"
         >
-          <img src="/sow-logo.png" width="28" height="28" alt="" class="rounded-md" />
-          <span>{t(lang, "site.name")}</span>
+          <img src="/sow-logo.png" width="28" height="28" alt="" />
+          <span class="font-serif text-lg">{t(lang, "site.name")}</span>
         </a>
-        <p class="text-sm text-[color:var(--color-ink-500)] max-w-xs">
+        <p class="text-sm text-[color:var(--color-ink-3)] max-w-xs leading-relaxed">
           {t(lang, "footer.tagline")}
         </p>
       </div>

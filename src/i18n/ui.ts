@@ -37,9 +37,15 @@ export const ui = {
     "nav.close": "關閉",
 
     "home.hero.eyebrow": "S.O.W. · Serving Others Worldwide",
-    "home.hero.title": "讓世界感受到神的愛,\n從一件實際的事開始。",
+    "home.hero.title": "用實際的行動,\n讓世界感受神的愛。",
     "home.hero.subtitle":
       "樂助會自北加州灣區出發,藉著事工、項目與物資援助,服侍世界各地有經濟、身體、心靈需要的人。",
+    "home.mission.eyebrow": "願景 · 使命",
+    "home.mission.vision_title": "願景",
+    "home.mission.vision_body": "用我們的行動,讓最需要幫助的人感受到上帝的愛。",
+    "home.mission.mission_title": "使命",
+    "home.mission.mission_body":
+      "藉著計劃、項目與實際的援助,在全球範圍內服務社區,以滿足人們在經濟、身體、心靈各方面的需求。",
     "home.cta.donate": "立即奉獻",
     "home.cta.learn": "認識我們",
 
@@ -118,9 +124,16 @@ export const ui = {
     "nav.close": "Close",
 
     "home.hero.eyebrow": "S.O.W. · Serving Others Worldwide",
-    "home.hero.title": "A world that feels God's love,\nstarting with one real act.",
+    "home.hero.title": "Practical action.\nA world that feels God's love.",
     "home.hero.subtitle":
       "From the SF Bay Area to the world, S.O.W. meets economic, physical, and spiritual needs through programs, projects, and direct aid.",
+    "home.mission.eyebrow": "Vision · Mission",
+    "home.mission.vision_title": "Vision",
+    "home.mission.vision_body":
+      "That our action lets those most in need feel the love of God.",
+    "home.mission.mission_title": "Mission",
+    "home.mission.mission_body":
+      "Through programs, projects and direct aid, we serve communities around the world — meeting needs of the body, mind and spirit.",
     "home.cta.donate": "Donate now",
     "home.cta.learn": "Learn about us",
 
