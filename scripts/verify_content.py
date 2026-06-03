@@ -156,7 +156,7 @@ def main() -> int:
         text = re.sub(r"/\*.*?\*/", "", text, flags=re.DOTALL)
         text = re.sub(r"//[^\n]*", "", text)
         missing = []
-        for s in re.findall(r'"((?:[^"\\]|\\.)*)"', text):
+        for s in re.findall(r'"([^"\n]*)"', text):   # single-line string literals only
             s = s.replace('\\"', '"')
             if s.startswith(("/", "@", "http")):
                 continue

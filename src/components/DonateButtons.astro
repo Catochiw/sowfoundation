@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "@i18n/ui";
-import { donate, paypalHostedButtonId } from "@data/donate";
+import { donate } from "@data/donate";
 
 interface Props {
   lang: Lang;
@@ -14,20 +14,24 @@ const d = donate[lang];
   <p class="donate__lead">{d.taxNote}</p>
 
   <div class="donate__grid">
-    <!-- Online giving (PayPal hosted button — POST form, works for real) -->
+    <!-- Online giving — the two original PayPal hosted buttons, as real POST
+         forms (a GET link to PayPal errors out). -->
     <section class="donate__card">
       <p class="donate__intro">{d.paypalIntro}</p>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-        <input type="hidden" name="cmd" value="_s-xclick" />
-        <input type="hidden" name="hosted_button_id" value={paypalHostedButtonId} />
-        <button type="submit" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
-            <path d="M7.4 21.5h-3a.6.6 0 0 1-.6-.7L6.6 3.4a1 1 0 0 1 1-.9h6.7c2.6 0 4.5.7 5.5 2 .9 1.2 1.1 2.8.7 4.7-.7 3.7-3.1 5.5-7 5.5h-2c-.6 0-1 .4-1.1 1L9.4 21a.6.6 0 0 1-.7.5H7.4z" />
-          </svg>
-          <span>{d.paypalButtonLabel}</span>
-        </button>
-      </form>
-      <p class="donate__note">{d.ukraineNote}</p>
+      <div class="donate__buttons">
+        {d.buttons.map((b) => (
+          <form action={b.action} method="post" target="_blank">
+            {b.cmd && <input type="hidden" name="cmd" value={b.cmd} />}
+            <input type="hidden" name="hosted_button_id" value={b.hostedButtonId} />
+            <button type="submit" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
+                <path d="M7.4 21.5h-3a.6.6 0 0 1-.6-.7L6.6 3.4a1 1 0 0 1 1-.9h6.7c2.6 0 4.5.7 5.5 2 .9 1.2 1.1 2.8.7 4.7-.7 3.7-3.1 5.5-7 5.5h-2c-.6 0-1 .4-1.1 1L9.4 21a.6.6 0 0 1-.7.5H7.4z" />
+              </svg>
+              <span>{b.label}</span>
+            </button>
+          </form>
+        ))}
+      </div>
     </section>
 
     <!-- Mail a check -->
@@ -84,12 +88,13 @@ const d = donate[lang];
     font-weight: 500;
     line-height: 1.7;
   }
-  .donate__card form { margin-top: 1.25rem; }
-  .donate__note {
-    margin: 1.25rem 0 0;
-    color: var(--color-ink-3);
-    font-size: 0.95rem;
+  .donate__buttons {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
+  .donate__buttons form { margin: 0; }
   .donate__address {
     font-style: normal;
     margin-top: 1rem;
