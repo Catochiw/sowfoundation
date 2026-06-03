@@ -10,7 +10,7 @@ summary: "Our board of directors guides the foundation's direction and oversees 
 
 ### Chairman of Board: Rev. Thomas Chan
 
-![Rev. Thomas Chan](https://peggychandesign.files.wordpress.com/2020/02/3i3a0024.jpg?w=392&h=595&zoom=2)
+![Rev. Thomas Chan](/images/directors/3i3a0024.jpg)
 
 I'm just a passenger, a speck of dust, my name doesn't matter. I hope this speck of dust will be a blessing to others on the earth, and it will honor the name of the Lord. I become a believer in the Lord when I was in secondary school. In 2009, I was called by God, resigned from a career as a director at APL, entered the Overseas Theological Seminary in the United States, and completed a three-year theological curriculum. In 2012, God arranged for me to become a hospice pastor for five years. In 2016, I was moved with three other directors to establish Serving Others Worldwide (S.O.W.) to help those in need. In 2019 I was ordained to become a pastor and to be a blessing to others.
 
@@ -18,7 +18,7 @@ I'm just a passenger, a speck of dust, my name doesn't matter. I hope this speck
 
 ### Director: Rev. Esther Lou
 
-![Rev. Esther Lou](https://peggychandesign.files.wordpress.com/2020/02/3i3a9962.jpg?w=398&h=578&zoom=2)
+![Rev. Esther Lou](/images/directors/3i3a9962.jpg)
 
 Rev. Esther Lou came from Taiwan, graduated from Fu Jen Catholic University in Taiwan with a Bachelor degree in History, and has worked in the restaurant industry with her husband in the United States for 35 years, owned 5 restaurants at once. She was also a successful real estate agent. Later she turned her focus on her faith and earned a Master of Christian Ministry from Christian Witness Theological Seminary. When her marriage was in shambles and her husband fell into drug addiction, God came and saved their family, directing them to serve in the mission field together.
 
@@ -28,7 +28,7 @@ Rev. Lou is the founder of Herald Restaurant Gospel Ministries, and now serves a
 
 ### Director: Mr. Sau Wing Lam
 
-![Mr. Sau Wing Lam](https://peggychandesign.files.wordpress.com/2020/02/maxresdefault.jpg)
+![Mr. Sau Wing Lam](/images/directors/maxresdefault.jpg)
 
 Sau-Wing is born and raised in a Christian family in Hong Kong. He accepted Christ at age 12, met his wife Edith at age 16, and came to the U.S. as a foreign student at age 17. He graduated with an MBA degree from U.C. Berkeley. Thereafter he held senior executive positions in banking, finance and telecommunications. His last position was the Chief Executive Officer and Chairman of the Board of the United Commercial Bank, then the largest bank in the Chinese community in the U.S.. When he turned 45, with God’s grace, he retired from the commercial world so he can devote all his time in a financial stewardship ministry. For the past 20 years he has been using financial management as a tool to reach the unsaved with the gospel. To avoid any kind of conflict of interest, and by God’s grace, he remains an unpaid volunteer throughout these 20 years of ministry.
 
@@ -40,6 +40,6 @@ Sau-Wing recently finished his 7-year tenure as Ministry Director of the Norther
 
 ### Director: Ms. Sue Chan
 
-![Ms. Sue Chan](https://peggychandesign.files.wordpress.com/2020/02/3i3a0050-3.jpg?w=396&h=595&zoom=2)
+![Ms. Sue Chan](/images/directors/3i3a0050-3.jpg)
 
 Sue Chan is a volunteer and one of the founding board members of Serving Others Worldwide (S.O.W.). She graduated from Purdue University with a Master of Science degree, and she had worked for telecommunications company Sprint for 15 years. She is currently the Deputy Executive Director of World Christian Restaurant Ministries.
