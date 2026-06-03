@@ -1,24 +1,30 @@
 # S.O.W. Foundation — Website v2
 
-Refactored static site for [sowfoundation.org](https://www.sowfoundation.org).
+Refactor of [sowfoundation.org](https://www.sowfoundation.org). Static, bilingual
+(繁體中文 / English), deployed on Vercel.
+
+All page **content** is migrated verbatim from the original site's database;
+`scripts/verify_content.py` checks every page against the DB dump. The design is
+the project's own editorial system — only presentation changed, not wording.
 
 ## Stack
 
-- **Astro 5** + TypeScript
-- **Tailwind CSS v4**
-- **Embla Carousel** for the homepage slider
-- **Resend** for contact-form email
-- **Cloudflare Turnstile** for spam protection
-- Deployed on **Vercel**
+- **Astro 5** + TypeScript (static output, Vercel adapter)
+- **Tailwind CSS v4** + a small design system in `src/styles/global.css`
+- **Resend** + **Cloudflare Turnstile** for the contact form
+- Self-hosted webfonts: Source Serif 4 + Noto Serif TC
 
 ## Local dev
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
-npm run build      # Static build to ./dist
-npm run preview    # Preview the build
+npm run dev        # http://localhost:4321  (needs Node 22 LTS)
+npm run build      # static build → .vercel/output
+npm run typecheck  # astro check
 ```
+
+> Node 26 can't run `astro dev` (a rolldown/Node issue). Use Node 22, or
+> `npm run build` + `node scripts/serve.mjs` to preview the built site.
 
 ## Required env vars (`.env`)
 
@@ -26,37 +32,42 @@ npm run preview    # Preview the build
 RESEND_API_KEY=re_xxx
 CONTACT_TO=thomas.chan@sowfoundation.org,Beatrice.chan@sowfoundation.org,t80819@aol.com,anders@projectsatoz.com
 CONTACT_FROM=no-reply@sowfoundation.org
-TURNSTILE_SITE_KEY=...
+PUBLIC_TURNSTILE_SITE_KEY=...
 TURNSTILE_SECRET_KEY=...
 ```
 
-## Project layout
+## Layout
 
 ```
 src/
-├── content/       # Markdown content (pages, tours, reports) — both zh & en
-├── components/    # .astro components
-├── data/          # Slider, nav, donation config (TS)
-├── i18n/          # UI strings
-├── layouts/       # Page layout
-├── pages/         # Routes — uses Astro i18n routing
-└── styles/        # Global CSS
-public/
-└── images/        # Migrated from legacy /attached/
-
-data/internal/     # PRIVATE — not committed (church directory CSV etc.)
+├── content/pages/{zh,en}/   # all page content (Markdown), routed by `group`
+├── pages/                   # routes (Astro i18n: /zh, /en)
+├── components/              # Header, Footer, Hero, PageHero, ContactForm, LangSwitcher
+├── layouts/Layout.astro     # <head>, header, footer, SEO
+├── data/                    # nav.ts (menu), site.ts (org contact info)
+├── i18n/ui.ts               # UI strings (chrome/nav/form labels only)
+└── styles/global.css        # design tokens + components
+public/images/               # migrated image assets
+scripts/                     # one-shot migration + verification tools
+data/internal/               # PRIVATE, gitignored (church directory CSV)
 ```
 
 ## Editing content
 
-All public content lives in `src/content/`. Edit the Markdown file, push to main, Vercel auto-redeploys.
+Everything visitors read lives in `src/content/pages/{zh,en}/{slug}.md`. Edit the
+Markdown, push to `main`, Vercel redeploys. The `group` in each file's frontmatter
+decides its URL:
 
-- Pages: `src/content/pages/{zh,en}/{slug}.md`
-- Tours: `src/content/tours/{zh,en}/{slug}.md`
-- Reports: `src/content/reports/{zh,en}/{slug}.md`
-- Slider: `src/data/slides.ts`
-- Donation buttons: `src/data/donation.ts`
+| group | URL |
+|---|---|
+| `home` | `/{lang}` |
+| `about` | `/{lang}/about/{slug}` |
+| `programs` | `/{lang}/programs/{slug}` |
+| `tours` | `/{lang}/tours/{slug}` |
+| `reports` | `/{lang}/reports/{slug}` |
+| `donation` | `/{lang}/donate` |
 
-## Migration history
+Other knobs: navigation in `src/data/nav.ts`, office contact in `src/data/site.ts`,
+colors/fonts in `src/styles/global.css`.
 
-This v2 replaces a CodeIgniter 3 / PHP 7.4 / MySQL stack that had grown messy over ~8 years. Dead features (church membership system, project/needs/comments, admin backend) were removed. Content was migrated from the `sow_page` table on 2026-06-01.
+See `ARCHITECTURE.md` for the full picture.
