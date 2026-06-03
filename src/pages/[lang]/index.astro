@@ -2,9 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/Hero.astro";
 import HomeSlider from "@components/HomeSlider.astro";
-import { getCollection } from "astro:content";
-import { allLocales, type Lang, t } from "@i18n/ui";
-import { localizedHref } from "@data/nav";
+import { getCollection, render } from "astro:content";
+import { allLocales, type Lang } from "@i18n/ui";
 
 export async function getStaticPaths() {
   return allLocales.map((lang) => ({ params: { lang } }));
@@ -12,185 +11,64 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 
-const all = await getCollection("pages", ({ data }) => data.lang === lang);
-
-const programs = all
-  .filter((p) => p.data.group === "programs")
-  .sort((a, b) => a.data.order - b.data.order);
-const tours = (await getCollection("tours", ({ data }) => data.lang === lang)).sort(
-  (a, b) => a.data.order - b.data.order,
-);
-
-const programNumber = (n: number) => String(n).padStart(2, "0");
+// The homepage body is the original CMS "home" page, verbatim:
+// 關於我們 / 願景 / 使命 + the ministry sections. Single source of truth.
+const pages = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "home");
+const home = pages[0];
+const { Content } = home ? await render(home) : { Content: null };
 ---
 
 <Layout lang={lang} pathWithoutLang="">
+  <!-- Grand centered brand mark -->
   <Hero lang={lang} />
 
-  <!-- Vision & Mission — a single, quiet editorial section.
-       Two columns separated by a hairline. -->
-  <section id="explore" class="section section-rule">
-    <div class="container-wide">
-      <header class="mb-12 sm:mb-16">
-        <p class="eyebrow">{t(lang, "home.mission.eyebrow")}</p>
-      </header>
+  <!-- The original top-of-page element: the ministry slider -->
+  <HomeSlider lang={lang} />
 
-      <div class="grid gap-12 sm:gap-x-20 sm:grid-cols-2">
-        <div class="sm:border-r sm:border-[color:var(--color-rule)] sm:pr-12">
-          <h3 class="font-serif text-2xl sm:text-3xl mb-4">
-            {t(lang, "home.mission.vision_title")}
-          </h3>
-          <p class="text-lg leading-relaxed text-[color:var(--color-ink-2)]">
-            {t(lang, "home.mission.vision_body")}
-          </p>
-        </div>
-        <div>
-          <h3 class="font-serif text-2xl sm:text-3xl mb-4">
-            {t(lang, "home.mission.mission_title")}
-          </h3>
-          <p class="text-lg leading-relaxed text-[color:var(--color-ink-2)]">
-            {t(lang, "home.mission.mission_body")}
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Programs — editorial list, not card grid.
-       Each row: 2-digit number · serif title · summary · read more.
-       Vignelli-style rigour. -->
-  <section class="section section-rule">
-    <div class="container-wide">
-      <header class="mb-12 sm:mb-16 flex items-baseline justify-between gap-4 flex-wrap">
-        <div>
-          <p class="eyebrow">{t(lang, "nav.programs")}</p>
-          <h2 class="font-serif">{t(lang, "home.programs.title")}</h2>
-        </div>
-        <p class="text-[color:var(--color-ink-3)] text-sm max-w-xs">
-          {t(lang, "home.programs.subtitle")}
-        </p>
-      </header>
-
-      <ol class="border-t border-[color:var(--color-rule)]">
-        {programs.map((p, i) => {
-          const slug = p.id.split("/").pop() ?? "";
-          return (
-            <li class="border-b border-[color:var(--color-rule)]">
-              <a
-                href={localizedHref(lang, `/programs/${slug}`)}
-                class="group grid grid-cols-[3rem_1fr] sm:grid-cols-[5rem_1fr_auto] gap-4 sm:gap-8 items-start sm:items-baseline py-7 sm:py-9 transition-colors"
-              >
-                <div class="font-serif text-xl sm:text-3xl text-[color:var(--color-ink-3)] tabular-nums group-hover:text-[color:var(--color-brand)] transition-colors">
-                  {programNumber(i + 1)}
-                </div>
-                <div class="sm:flex sm:items-baseline sm:gap-8 col-span-1 sm:col-span-1">
-                  <h3 class="font-serif text-2xl sm:text-3xl text-[color:var(--color-ink)] mb-2 sm:mb-0 sm:min-w-[10rem]">
-                    {p.data.title}
-                  </h3>
-                  <p class="text-[color:var(--color-ink-2)] text-base sm:text-lg leading-relaxed max-w-2xl">
-                    {p.data.summary ?? ""}
-                  </p>
-                </div>
-                <div class="col-span-2 sm:col-span-1 mt-3 sm:mt-0">
-                  <span class="read-more">
-                    <span>{t(lang, "common.read_more")}</span>
-                    <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </a>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
-  </section>
-
-  <!-- Tours — full-width feature spread per tour.
-       Image dominates, text quiet beside it. -->
-  {tours.length > 0 && (
-    <section class="section section-rule">
-      <div class="container-wide">
-        <header class="mb-12 sm:mb-16">
-          <p class="eyebrow">{t(lang, "nav.tours")}</p>
-          <h2 class="font-serif">{t(lang, "home.tours.title")}</h2>
-          <p class="mt-3 text-[color:var(--color-ink-3)] max-w-2xl">
-            {t(lang, "home.tours.subtitle")}
-          </p>
-        </header>
-
-        <div class="space-y-16 sm:space-y-24">
-          {tours.map((tour, i) => {
-            const slug = tour.id.split("/").pop() ?? "";
-            const flip = i % 2 === 1;
-            return (
-              <article class={`grid gap-8 lg:gap-14 lg:grid-cols-12 items-center`}>
-                {tour.data.banner && (
-                  <a
-                    href={localizedHref(lang, `/tours/${slug}`)}
-                    class={`block lg:col-span-7 overflow-hidden ${flip ? "lg:order-2" : ""}`}
-                  >
-                    <div class="aspect-[16/10] overflow-hidden bg-[color:var(--color-rule-2)]">
-                      <img
-                        src={tour.data.banner}
-                        alt=""
-                        loading="lazy"
-                        class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-                      />
-                    </div>
-                  </a>
-                )}
-                <div class={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
-                  {tour.data.dateRange && (
-                    <p class="eyebrow text-[color:var(--color-ink-3)]">{tour.data.dateRange}</p>
-                  )}
-                  <h3 class="font-serif text-2xl sm:text-3xl mb-4">
-                    <a href={localizedHref(lang, `/tours/${slug}`)} class="text-[color:var(--color-ink)] hover:text-[color:var(--color-brand)]">
-                      {tour.data.title}
-                    </a>
-                  </h3>
-                  {tour.data.summary && (
-                    <p class="text-[color:var(--color-ink-2)] text-base sm:text-lg leading-relaxed">
-                      {tour.data.summary}
-                    </p>
-                  )}
-                  <div class="mt-6">
-                    <a href={localizedHref(lang, `/tours/${slug}`)} class="read-more">
-                      <span>{t(lang, "common.read_more")}</span>
-                      <span aria-hidden="true">→</span>
-                    </a>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
+  <!-- Original homepage copy, rendered faithfully from home.md -->
+  {Content && (
+    <section id="about" class="section">
+      <article class="container-prose prose-content home-prose">
+        <Content />
+      </article>
     </section>
   )}
-
-  <!-- Featured highlights — slider becomes a quiet supporting moment, framed -->
-  <section class="section-tight section-rule">
-    <div class="container-wide">
-      <header class="mb-8">
-        <p class="eyebrow">
-          {lang === "zh" ? "近期事工" : "Currently"}
-        </p>
-      </header>
-    </div>
-    <HomeSlider lang={lang} />
-  </section>
-
-  <!-- Donate banner — restrained, full-width, single line of weight -->
-  <section class="section section-rule" style="background: var(--color-paper);">
-    <div class="container-prose text-center">
-      <p class="eyebrow">{t(lang, "nav.donate")}</p>
-      <h2 class="font-serif mb-6">{t(lang, "home.donate.title")}</h2>
-      <p class="text-lg leading-relaxed text-[color:var(--color-ink-2)] mb-8">
-        {t(lang, "home.donate.subtitle")}
-      </p>
-      <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
-        {t(lang, "home.cta.donate")}
-      </a>
-    </div>
-  </section>
 </Layout>
+
+<style>
+  /* Homepage body — slightly grander rhythm than a normal article,
+     so the ministry sections read as an editorial spread. */
+  .home-prose {
+    font-size: 1.0625rem;
+  }
+  .home-prose :global(h2) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+    letter-spacing: -0.02em;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+  }
+  .home-prose :global(h3) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 1vw + 0.9rem, 1.6rem);
+    margin-top: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .home-prose :global(img) {
+    width: 100%;
+    border-radius: 2px;
+    margin-block: 1.75rem;
+  }
+  .home-prose :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+    margin-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .home-prose :global(p) {
+    line-height: 1.8;
+    color: var(--color-ink-2);
+  }
+</style>

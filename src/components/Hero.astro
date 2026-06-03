@@ -1,7 +1,6 @@
 ---
 import type { Lang } from "@i18n/ui";
 import { t } from "@i18n/ui";
-import { localizedHref } from "@data/nav";
 
 interface Props {
   lang: Lang;
@@ -11,41 +10,23 @@ const { lang } = Astro.props;
 
 <section class="hero">
   <div class="hero__inner">
-    <!-- Establishing line above the mark — small, sparing, sets the
-         tonal anchor (Vignelli "less but better") -->
     <p class="hero__est">
       <span>Est. 2016</span>
       <span class="hero__est-dot" aria-hidden="true">·</span>
       <span>Pleasanton, California</span>
     </p>
 
-    <!-- Centered brand mark, sized for presence without dominance -->
+    <!-- Centered brand mark — the homepage's single grand gesture.
+         The logo already carries the "Serving Others Worldwide" wordmark,
+         so no additional slogan is layered on top of it. -->
     <a href={`/${lang}`} class="hero__mark" aria-label={t(lang, "site.name")}>
-      <img src="/sow-logo.png" alt="" width="500" height="206" />
+      <img src="/sow-logo.png" alt={t(lang, "site.name")} width="500" height="206" />
     </a>
 
-    <!-- Establishing rule -->
     <div class="hero__rule" aria-hidden="true"></div>
-
-    <!-- The line that does the heavy lifting — serif, restrained -->
-    <h1 class="hero__line">{t(lang, "home.hero.title")}</h1>
-
-    <!-- Quiet supporting text -->
-    <p class="hero__sub">{t(lang, "home.hero.subtitle")}</p>
-
-    <!-- Two unequal actions: primary + ghost (Pentagram-style) -->
-    <div class="hero__cta">
-      <a href={localizedHref(lang, "/donate")} class="btn btn-primary">
-        {t(lang, "home.cta.donate")}
-      </a>
-      <a href={localizedHref(lang, "/about/org")} class="read-more">
-        <span>{t(lang, "home.cta.learn")}</span>
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
   </div>
 
-  <a href="#explore" class="hero__scroll" aria-label="Scroll">
+  <a href="#about" class="hero__scroll" aria-label="Scroll">
     <span class="hero__scroll-line" aria-hidden="true"></span>
   </a>
 </section>
@@ -53,36 +34,29 @@ const { lang } = Astro.props;
 <style>
   .hero {
     position: relative;
-    min-height: clamp(720px, 96vh, 980px);
+    min-height: clamp(440px, 64vh, 640px);
     display: flex;
     align-items: center;
     background: var(--color-canvas);
     overflow: hidden;
   }
-  /* A single architectural detail — a thin asymmetric vertical rule on
-     the left edge, à la Ando/Zumthor. */
-  .hero::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: var(--color-rule);
-    pointer-events: none;
-  }
+  .hero::before,
   .hero::after {
     content: "";
     position: absolute;
-    right: 0; top: 0; bottom: 0;
+    top: 0; bottom: 0;
     width: 1px;
     background: var(--color-rule);
     pointer-events: none;
   }
+  .hero::before { left: 0; }
+  .hero::after { right: 0; }
 
   .hero__inner {
     width: 100%;
     max-width: 880px;
     margin-inline: auto;
-    padding: clamp(3rem, 7vw, 6rem) 1.5rem 4.5rem;
+    padding: clamp(3rem, 6vw, 5rem) 1.5rem clamp(2.5rem, 4vw, 3.5rem);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -105,63 +79,27 @@ const { lang } = Astro.props;
 
   .hero__mark {
     display: inline-flex;
-    margin-bottom: clamp(1.5rem, 2vw, 2.25rem);
     transition: opacity 200ms ease;
   }
   .hero__mark:hover { opacity: 0.85; }
   .hero__mark img {
-    width: clamp(240px, 30vw, 340px);
+    width: clamp(260px, 34vw, 380px);
     height: auto;
   }
 
-  /* Hairline divider between mark and the line */
   .hero__rule {
     width: 1px;
     height: clamp(2rem, 4vw, 3.5rem);
     background: var(--color-rule);
-    margin-bottom: clamp(2rem, 3vw, 2.75rem);
-  }
-
-  .hero__line {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(2rem, 4.5vw + 0.4rem, 3.75rem);
-    line-height: 1.18;
-    letter-spacing: -0.018em;
-    color: var(--color-ink);
-    margin: 0;
-    max-width: 720px;
-    text-wrap: balance;
-    white-space: pre-line;
-  }
-
-  .hero__sub {
-    font-family: var(--font-sans);
-    font-size: clamp(1rem, 0.6vw + 0.85rem, 1.125rem);
-    line-height: 1.7;
-    color: var(--color-ink-3);
-    max-width: 560px;
-    margin: clamp(1.25rem, 2vw, 1.75rem) 0 0;
-  }
-
-  .hero__cta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
     margin-top: clamp(2rem, 3vw, 2.75rem);
   }
 
-  /* Static scroll affordance — a 36px vertical hairline, no animation */
   .hero__scroll {
     position: absolute;
     left: 50%;
-    bottom: clamp(1.5rem, 3vw, 2.5rem);
+    bottom: clamp(1.25rem, 3vw, 2rem);
     transform: translateX(-50%);
     display: inline-flex;
-    flex-direction: column;
-    align-items: center;
     padding: 0.5rem;
     color: var(--color-ink-3);
     transition: color 200ms ease;
