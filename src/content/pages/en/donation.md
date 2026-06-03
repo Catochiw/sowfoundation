@@ -11,12 +11,26 @@ Serving Others Worldwide (S.O.W.) is an U.S.A IRS approved 501(c)(3) nonprofit o
 
 Donations are tax-deductible to the extent permitted by law. Our Federal Tax ID # is 81-3947479.
 
-Please make donations payable to S.O.W., and mail to:S.O.W.
+Please make donations payable to S.O.W., and mail to:
 
-6280 W. Las Positas Blvd., Suite 203Pleasanton, CA 94588U.S.A.
+S.O.W.\
+6280 W. Las Positas Blvd., Suite 203\
+Pleasanton, CA 94588\
+U.S.A.
 
-You may also donate via Paypal, by clicking on the button provided below:General Donation
+You may also donate via Paypal, by clicking on the button provided below:
 
-[![](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+General Donation
 
-Ukraine Refugee ReliefCharles Schwab Account Number: 4507-8379Here is our contact phone number and email:Tel: 1+ (510) 256-5156Email: info@sowfoundation.orgThank you so much for your generosity!
+[![General Donation](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+
+Ukraine Refugee Relief
+
+Charles Schwab Account Number: 4507-8379
+
+Here is our contact phone number and email:
+
+Tel: 1+ (510) 256-5156\
+Email: info@sowfoundation.org
+
+Thank you so much for your generosity!

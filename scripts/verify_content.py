@@ -82,6 +82,8 @@ def strip_md(s: str) -> str:
     s = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", s)       # images
     s = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", s)     # links -> text
     s = re.sub(r"</?[^>]+>", " ", s)                   # any html
+    s = s.replace("\\", " ")                            # markdown hard-break backslashes
+    s = re.sub(r"(?m)^\s*\d+\.\s+", " ", s)            # ordered-list markers (render as <ol>, no digit in original)
     s = re.sub(r"[#>*_`|-]+", " ", s)                  # md syntax
     return s
 

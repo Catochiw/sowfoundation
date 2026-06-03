@@ -9,17 +9,26 @@ summary: "你的奉獻是樂助會延續事工的動力。可透過 PayPal 線�
 
 「樂助會」是一間由美國國稅局IRS正式核准的501(c)(3)非牟利慈善機構，我們所提供的捐款收據可作報稅用。
 
-支票抬頭請寫「S.O.W.」，並寄至:S.O.W.
+支票抬頭請寫「S.O.W.」，並寄至:
 
-6280 W. Las Positas Blvd., Suite 203Pleasanton, CA 94588U.S.A.
+S.O.W.\
+6280 W. Las Positas Blvd., Suite 203\
+Pleasanton, CA 94588\
+U.S.A.
 
-### 您也可以由以下Paypal安全地網路奉獻：
+### 您也可以由以下 Paypal 安全地網路奉獻：
+
 一般奉獻
 
-[![](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+[![一般奉獻](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
 
-支援烏克蘭Charles Schwab 户口號碼: 4507-8379
+支援烏克蘭
 
-### 我們的電話和e-mail是
+Charles Schwab 户口號碼: 4507-8379
 
-電話: 1+ (510) 256-5156電郵: info@sowfoundation.org感謝您的無私奉獻！
+### 我們的電話和 e-mail 是
+
+電話: 1+ (510) 256-5156\
+電郵: info@sowfoundation.org
+
+感謝您的無私奉獻！

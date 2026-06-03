@@ -1,7 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PageHero from "@components/PageHero.astro";
-import DonateButtons from "@components/DonateButtons.astro";
 import { getCollection, render } from "astro:content";
 import { allLocales, type Lang, t } from "@i18n/ui";
 
@@ -10,30 +9,22 @@ export async function getStaticPaths() {
 }
 const { lang } = Astro.params as { lang: Lang };
 
-// Optional rich content: src/content/pages/{lang}/donation.md
+// Render the original donation page content verbatim (src/content/pages/{lang}/donation.md).
 const all = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "donation");
 const donationPage = all[0];
-const DonationBody = donationPage ? (await render(donationPage)).Content : null;
+const { Content } = await render(donationPage);
 ---
 
-<Layout lang={lang} title={t(lang, "donate.title")} pathWithoutLang="/donate">
+<Layout lang={lang} title={donationPage.data.title} pathWithoutLang="/donate">
   <PageHero
     eyebrow={t(lang, "site.tagline")}
-    title={t(lang, "donate.title")}
-    subtitle={t(lang, "donate.intro")}
+    title={donationPage.data.title}
+    banner={donationPage.data.banner}
   />
 
   <section class="section">
-    <div class="container-wide max-w-5xl">
-      <DonateButtons lang={lang} />
-    </div>
+    <article class="container-prose prose-content">
+      <Content />
+    </article>
   </section>
-
-  {DonationBody && (
-    <section class="section section-alt">
-      <article class="container-prose prose-content">
-        <DonationBody />
-      </article>
-    </section>
-  )}
 </Layout>
