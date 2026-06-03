@@ -24,7 +24,6 @@ SLUG_MAP = {
     "home": "home", "org": "org", "directors": "directors",
     "zz": "senior-care", "jz": "disaster-relief", "fp": "poverty-relief",
     "zx": "scholarship", "co": "pandemic-response",
-    "ly": "holy-land", "fz": "ark", "lc": "longchuan", "donation": "donation",
 }
 
 TUPLE_RE = re.compile(

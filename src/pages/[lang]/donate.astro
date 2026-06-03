@@ -1,30 +1,26 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PageHero from "@components/PageHero.astro";
-import { getCollection, render } from "astro:content";
+import DonateButtons from "@components/DonateButtons.astro";
 import { allLocales, type Lang, t } from "@i18n/ui";
 
 export async function getStaticPaths() {
   return allLocales.map((lang) => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Lang };
-
-// Render the original donation page content verbatim (src/content/pages/{lang}/donation.md).
-const all = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "donation");
-const donationPage = all[0];
-const { Content } = await render(donationPage);
+const title = lang === "zh" ? "奉獻" : "Donate";
 ---
 
-<Layout lang={lang} title={donationPage.data.title} pathWithoutLang="/donate">
+<Layout lang={lang} title={title} pathWithoutLang="/donate">
   <PageHero
     eyebrow={t(lang, "site.tagline")}
-    title={donationPage.data.title}
-    banner={donationPage.data.banner}
+    title={title}
+    banner="/images/20180309/20180309202320_25521.jpg"
   />
 
   <section class="section">
-    <article class="container-prose prose-content">
-      <Content />
-    </article>
+    <div class="container-wide">
+      <DonateButtons lang={lang} />
+    </div>
   </section>
 </Layout>
