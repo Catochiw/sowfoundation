@@ -16,13 +16,11 @@
     { "source": "/page/lc", "destination": "/zh/reports/longchuan", "permanent": true },
     { "source": "/page/donation", "destination": "/zh/donate", "permanent": true },
     { "source": "/contact", "destination": "/zh/contact", "permanent": true },
-    { "source": "/SOW_2026_Tour", "destination": "/zh/tours/2026-greece-turkey", "permanent": true },
-    { "source": "/SOW_2026_Tour/(.*)", "destination": "/zh/tours/2026-greece-turkey", "permanent": true },
-    { "source": "/SOW_Greece_and_Turkey_2025", "destination": "/zh/tours", "permanent": true },
-    { "source": "/SOW_Greece_and_Turkey_2025/(.*)", "destination": "/zh/tours", "permanent": true },
-    { "source": "/turkey.php", "destination": "/zh/tours", "permanent": true },
-    { "source": "/en", "destination": "/en", "permanent": false },
-    { "source": "/zh", "destination": "/zh", "permanent": false }
+    { "source": "/SOW_2026_Tour", "destination": "/zh/tours/holy-land", "permanent": true },
+    { "source": "/SOW_2026_Tour/(.*)", "destination": "/zh/tours/holy-land", "permanent": true },
+    { "source": "/SOW_Greece_and_Turkey_2025", "destination": "/zh/tours/holy-land", "permanent": true },
+    { "source": "/SOW_Greece_and_Turkey_2025/(.*)", "destination": "/zh/tours/holy-land", "permanent": true },
+    { "source": "/turkey.php", "destination": "/zh/tours/holy-land", "permanent": true }
   ],
   "headers": [
     {

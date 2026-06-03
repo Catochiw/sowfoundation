@@ -39,20 +39,6 @@
   --color-gold:       #b08a4c;     /* warm gold for pull-quotes / verses */
   --color-error:      #b54545;
   --color-success:    #4a7b4a;
-
-  /* Legacy aliases (kept so existing components keep working until ported) */
-  --color-ink-900: var(--color-ink);
-  --color-ink-700: var(--color-ink-2);
-  --color-ink-500: var(--color-ink-3);
-  --color-ink-300: var(--color-rule);
-  --color-ink-100: var(--color-rule-2);
-  --color-ink-50:  var(--color-canvas);
-  --color-white:   var(--color-paper);
-  --color-brand-600: var(--color-brand);
-  --color-brand-700: var(--color-brand-2);
-  --color-brand-500: var(--color-brand);
-  --color-brand-50:  #f0f6f7;
-  --color-warm-600:  var(--color-gold);
 }
 
 /* Base resets, inside @layer base so component classes can override
@@ -242,6 +228,42 @@
     padding-left: 1.5rem;
     margin: 2rem 0;
   }
+
+  /* Index / landing list — used by /programs, /tours, /about overview pages.
+     A restrained, hairline-ruled list of serif titles. */
+  .index-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+  .index-list a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+  .index-list a:hover { color: var(--color-brand); }
+  .index-list__title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.375rem, 1.5vw + 0.9rem, 2rem);
+    letter-spacing: -0.01em;
+  }
+  .index-list__arrow {
+    font-family: var(--font-sans);
+    color: var(--color-ink-4);
+    transition: transform 180ms ease, color 180ms ease;
+  }
+  .index-list a:hover .index-list__arrow {
+    transform: translateX(4px);
+    color: var(--color-brand);
+  }
 }
 
 /* Long-form content (rendered .md inside .prose-content) */
@@ -285,6 +307,37 @@
 .prose-content a:hover {
   color: var(--color-brand);
   border-bottom-color: var(--color-brand);
+}
+
+/* A PayPal hosted-button link rendered in content becomes a primary button
+   in the site's own design language (no legacy PayPal button imagery). */
+.prose-content a[href*="paypal.com"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 980px;
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border-bottom: 0;
+  transition: background-color 180ms ease;
+}
+.prose-content a[href*="paypal.com"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7.4 21.5h-3a.6.6 0 0 1-.6-.7L6.6 3.4a1 1 0 0 1 1-.9h6.7c2.6 0 4.5.7 5.5 2 .9 1.2 1.1 2.8.7 4.7-.7 3.7-3.1 5.5-7 5.5h-2c-.6 0-1 .4-1.1 1L9.4 21a.6.6 0 0 1-.7.5H7.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7.4 21.5h-3a.6.6 0 0 1-.6-.7L6.6 3.4a1 1 0 0 1 1-.9h6.7c2.6 0 4.5.7 5.5 2 .9 1.2 1.1 2.8.7 4.7-.7 3.7-3.1 5.5-7 5.5h-2c-.6 0-1 .4-1.1 1L9.4 21a.6.6 0 0 1-.7.5H7.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.prose-content a[href*="paypal.com"]:hover {
+  background-color: var(--color-brand);
+  color: var(--color-paper);
+  border-bottom: 0;
 }
 
 .prose-content strong { color: var(--color-ink); }

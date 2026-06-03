@@ -20,9 +20,7 @@ U.S.A.
 
 You may also donate via Paypal, by clicking on the button provided below:
 
-General Donation
-
-[![General Donation](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+[General Donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
 
 Ukraine Refugee Relief
 

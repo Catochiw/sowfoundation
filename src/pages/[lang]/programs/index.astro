@@ -16,30 +16,23 @@ const programs = (
 ---
 
 <Layout lang={lang} title={t(lang, "nav.programs")} pathWithoutLang="/programs">
-  <PageHero
-    eyebrow={t(lang, "site.tagline")}
-    title={t(lang, "nav.programs")}
-    subtitle={t(lang, "home.programs.subtitle")}
-  />
+  <PageHero eyebrow={t(lang, "site.tagline")} title={t(lang, "nav.programs")} />
 
   <section class="section">
-    <div class="container-wide">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="container-prose">
+      <ul class="index-list">
         {programs.map((p) => {
           const slug = p.id.split("/").pop() ?? "";
           return (
-            <a href={localizedHref(lang, `/programs/${slug}`)} class="card-soft block group">
-              <h3 class="text-xl group-hover:text-[color:var(--color-brand-700)] transition-colors">
-                {p.data.title}
-              </h3>
-              {p.data.summary && <p class="mt-3 text-sm text-[color:var(--color-ink-500)]">{p.data.summary}</p>}
-              <p class="mt-5 text-sm font-medium text-[color:var(--color-brand-600)]">
-                {t(lang, "common.read_more")} →
-              </p>
-            </a>
+            <li>
+              <a href={localizedHref(lang, `/programs/${slug}`)}>
+                <span class="index-list__title">{p.data.title}</span>
+                <span class="index-list__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   </section>
 </Layout>

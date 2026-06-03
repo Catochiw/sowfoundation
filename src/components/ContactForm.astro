@@ -23,7 +23,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   </div>
 
   <div>
-    <label for="cf-name" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+    <label for="cf-name" class="block text-sm font-medium text-[color:var(--color-ink)]">
       {t(lang, "contact.form.name")} <span class="text-[color:var(--color-error)]">*</span>
     </label>
     <input
@@ -33,12 +33,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       required
       maxlength="120"
       autocomplete="name"
-      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-4 py-3 text-base text-[color:var(--color-ink)] placeholder-[color:var(--color-ink-3)] shadow-sm focus:border-[color:var(--color-brand)] focus:ring-0 focus:outline-none"
     />
   </div>
 
   <div>
-    <label for="cf-email" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+    <label for="cf-email" class="block text-sm font-medium text-[color:var(--color-ink)]">
       {t(lang, "contact.form.email")} <span class="text-[color:var(--color-error)]">*</span>
     </label>
     <input
@@ -48,12 +48,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       required
       maxlength="200"
       autocomplete="email"
-      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-4 py-3 text-base text-[color:var(--color-ink)] placeholder-[color:var(--color-ink-3)] shadow-sm focus:border-[color:var(--color-brand)] focus:ring-0 focus:outline-none"
     />
   </div>
 
   <div>
-    <label for="cf-message" class="block text-sm font-medium text-[color:var(--color-ink-900)]">
+    <label for="cf-message" class="block text-sm font-medium text-[color:var(--color-ink)]">
       {t(lang, "contact.form.message")} <span class="text-[color:var(--color-error)]">*</span>
     </label>
     <textarea
@@ -62,7 +62,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       required
       rows="6"
       maxlength="5000"
-      class="mt-2 block w-full rounded-xl border border-[color:var(--color-ink-300)] bg-white px-4 py-3 text-base text-[color:var(--color-ink-900)] placeholder-[color:var(--color-ink-500)] shadow-sm focus:border-[color:var(--color-brand-600)] focus:ring-0 focus:outline-none resize-y"
+      class="mt-2 block w-full rounded-xl border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-4 py-3 text-base text-[color:var(--color-ink)] placeholder-[color:var(--color-ink-3)] shadow-sm focus:border-[color:var(--color-brand)] focus:ring-0 focus:outline-none resize-y"
     ></textarea>
   </div>
 

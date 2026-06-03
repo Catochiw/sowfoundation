@@ -10,7 +10,7 @@ const { lang, pathWithoutLang } = Astro.props;
 const normalizedPath = pathWithoutLang || "";
 ---
 
-<div class="inline-flex items-center rounded-full border border-[color:var(--color-ink-300)] bg-white p-0.5 text-xs font-medium" role="group" aria-label="Language">
+<div class="inline-flex items-center rounded-full border border-[color:var(--color-rule)] p-0.5 text-xs font-medium" role="group" aria-label="Language">
   {allLocales.map((loc) => {
     const isActive = loc === lang;
     const href = `/${loc}${normalizedPath}`.replace(/\/$/, "") || `/${loc}`;
@@ -21,8 +21,8 @@ const normalizedPath = pathWithoutLang || "";
         class:list={[
           "rounded-full px-3 py-1 transition-colors",
           isActive
-            ? "bg-[color:var(--color-ink-900)] text-white"
-            : "text-[color:var(--color-ink-700)] hover:text-[color:var(--color-ink-900)]",
+            ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
+            : "text-[color:var(--color-ink-3)] hover:text-[color:var(--color-ink)]",
         ]}
         title={languages[loc]}
       >

@@ -18,9 +18,7 @@ U.S.A.
 
 ### 您也可以由以下 Paypal 安全地網路奉獻：
 
-一般奉獻
-
-[![一般奉獻](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+[一般奉獻](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
 
 支援烏克蘭
 

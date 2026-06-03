@@ -10,32 +10,29 @@ export async function getStaticPaths() {
 }
 const { lang } = Astro.params as { lang: Lang };
 
-const aboutPages = (await getCollection("pages", ({ data }) => data.lang === lang && data.group === "about"))
-  .sort((a, b) => a.data.order - b.data.order);
+const aboutPages = (
+  await getCollection("pages", ({ data }) => data.lang === lang && data.group === "about")
+).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout lang={lang} title={t(lang, "nav.about")} pathWithoutLang="/about">
-  <PageHero
-    eyebrow={t(lang, "site.tagline")}
-    title={t(lang, "nav.about")}
-  />
+  <PageHero eyebrow={t(lang, "site.tagline")} title={t(lang, "nav.about")} />
 
   <section class="section">
-    <div class="container-wide">
-      <div class="grid gap-6 md:grid-cols-2">
+    <div class="container-prose">
+      <ul class="index-list">
         {aboutPages.map((p) => {
           const slug = p.id.split("/").pop() ?? "";
           return (
-            <a href={localizedHref(lang, `/about/${slug}`)} class="card-soft block">
-              <h3>{p.data.title}</h3>
-              {p.data.summary && <p class="mt-3 text-[color:var(--color-ink-500)]">{p.data.summary}</p>}
-              <p class="mt-5 text-sm font-medium text-[color:var(--color-brand-600)]">
-                {t(lang, "common.read_more")} →
-              </p>
-            </a>
+            <li>
+              <a href={localizedHref(lang, `/about/${slug}`)}>
+                <span class="index-list__title">{p.data.title}</span>
+                <span class="index-list__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   </section>
 </Layout>

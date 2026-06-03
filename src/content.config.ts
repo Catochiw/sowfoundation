@@ -2,55 +2,29 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 /**
- * Content collections.
+ * One content collection: `pages`. Every page is a Markdown file under
+ * src/content/pages/{zh,en}/ and is routed by its `group`:
  *
- * - `pages`   — long-form static content (about / programs / tours / reports / donation / home).
- *               Migrated from the legacy `sow_page` MySQL table.
- * - `tours`   — individual tour campaigns (dated, priced, status-tracked).
- * - `reports` — field reports / blog-style updates from sponsored areas.
+ *   home      → /{lang}            (homepage body)
+ *   about     → /{lang}/about/{slug}
+ *   programs  → /{lang}/programs/{slug}
+ *   tours     → /{lang}/tours/{slug}
+ *   reports   → /{lang}/reports/{slug}
+ *   donation  → /{lang}/donate
+ *
+ * Content is migrated verbatim from the legacy `sow_page` MySQL table;
+ * see scripts/verify_content.py for the faithfulness check.
  */
-
-const pageGroup = z.enum(["home", "about", "programs", "tours", "reports", "donation"]);
-const lang = z.enum(["zh", "en"]);
-
 const pages = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/pages" }),
   schema: z.object({
     title: z.string(),
-    group: pageGroup,
+    group: z.enum(["home", "about", "programs", "tours", "reports", "donation"]),
     order: z.number().default(0),
     banner: z.string().optional(),
     summary: z.string().optional(),
-    lang,
+    lang: z.enum(["zh", "en"]),
   }),
 });
 
-const tours = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/tours" }),
-  schema: z.object({
-    title: z.string(),
-    group: z.literal("tours").default("tours"),
-    order: z.number().default(0),
-    banner: z.string().optional(),
-    summary: z.string().optional(),
-    lang,
-    dateRange: z.string().optional(),
-    priceUSD: z.number().optional(),
-    status: z.enum(["upcoming", "past", "draft"]).default("upcoming"),
-  }),
-});
-
-const reports = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/reports" }),
-  schema: z.object({
-    title: z.string(),
-    group: z.literal("reports").default("reports"),
-    order: z.number().default(0),
-    banner: z.string().optional(),
-    summary: z.string().optional(),
-    lang,
-    publishedAt: z.coerce.date().optional(),
-  }),
-});
-
-export const collections = { pages, tours, reports };
+export const collections = { pages };
