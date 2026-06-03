@@ -1,71 +1,151 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/Hero.astro";
-import { getCollection, render } from "astro:content";
-import { allLocales, type Lang } from "@i18n/ui";
+import { allLocales, type Lang, t } from "@i18n/ui";
+import { localizedHref } from "@data/nav";
+import { home } from "@data/home";
 
 export async function getStaticPaths() {
   return allLocales.map((lang) => ({ params: { lang } }));
 }
-
 const { lang } = Astro.params as { lang: Lang };
-
-// The homepage body is the original CMS "home" page, verbatim:
-// 關於我們 / 願景 / 使命 + the ministry sections. Single source of truth.
-const pages = await getCollection("pages", ({ data }) => data.lang === lang && data.group === "home");
-const home = pages[0];
-const { Content } = home ? await render(home) : { Content: null };
+const h = home[lang];
+const readMore = lang === "zh" ? "了解更多" : "Learn more";
 ---
 
 <Layout lang={lang} pathWithoutLang="">
-  <!-- Grand centered brand mark -->
   <Hero lang={lang} />
 
-  <!-- Original homepage copy, rendered faithfully from home.md
-       (關於我們 / 願景 / 使命 + the ministry sections). No invented copy. -->
-  {Content && (
-    <section id="about" class="section">
-      <article class="container-prose prose-content home-prose">
-        <Content />
-      </article>
-    </section>
-  )}
+  <!-- About + Vision / Mission -->
+  <section id="about" class="section section-rule">
+    <div class="container-wide grid gap-12 lg:grid-cols-2 lg:items-center">
+      <figure class="about__figure">
+        <img src={h.aboutImage} alt="" loading="lazy" />
+      </figure>
+      <div>
+        <p class="eyebrow">{t(lang, "nav.about")}</p>
+        <p class="about__intro">{h.intro}</p>
+
+        <div class="vm">
+          <div>
+            <h2 class="vm__label">{h.visionLabel}</h2>
+            <p class="vm__text">{h.vision}</p>
+          </div>
+          <div>
+            <h2 class="vm__label">{h.missionLabel}</h2>
+            <p class="vm__text">{h.mission}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministries — alternating feature rows -->
+  <section class="section section-rule section-alt">
+    <div class="container-wide">
+      <header class="mb-14 sm:mb-20 text-center">
+        <p class="eyebrow">{t(lang, "site.tagline")}</p>
+        <h2 class="font-serif text-[clamp(2rem,3vw+1rem,3rem)]">{t(lang, "nav.programs")}</h2>
+      </header>
+
+      <div class="ministries">
+        {h.ministries.map((m, i) => (
+          <article class={`ministry ${i % 2 === 1 ? "ministry--flip" : ""}`}>
+            <a href={localizedHref(lang, m.href)} class="ministry__media">
+              <img src={m.image} alt={m.title} loading="lazy" />
+            </a>
+            <div class="ministry__body">
+              <h3 class="ministry__title">
+                <a href={localizedHref(lang, m.href)}>{m.title}</a>
+              </h3>
+              <p class="ministry__blurb">{m.blurb}</p>
+              <a href={localizedHref(lang, m.href)} class="read-more">
+                <span>{readMore}</span><span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate CTA -->
+  <section class="section section-rule">
+    <div class="container-prose text-center">
+      <p class="eyebrow">{t(lang, "nav.donate")}</p>
+      <p class="donate-cta__text">{h.vision}</p>
+      <a href={localizedHref(lang, "/donate")} class="btn btn-primary mt-7">
+        {t(lang, "nav.donate")}
+      </a>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  /* Homepage body — slightly grander rhythm than a normal article,
-     so the ministry sections read as an editorial spread. */
-  .home-prose {
-    font-size: 1.0625rem;
-  }
-  .home-prose :global(h2) {
+  .about__figure { margin: 0; overflow: hidden; border-radius: 14px; }
+  .about__figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about__intro {
     font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
-    letter-spacing: -0.02em;
-    margin-top: clamp(3rem, 6vw, 5rem);
-    margin-bottom: 1.5rem;
-    text-wrap: balance;
+    font-size: clamp(1.25rem, 1vw + 1rem, 1.6rem);
+    line-height: 1.6;
+    color: var(--color-ink);
+    margin: 0.75rem 0 0;
   }
-  .home-prose :global(h3) {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: clamp(1.25rem, 1vw + 0.9rem, 1.6rem);
-    margin-top: 2.25rem;
-    margin-bottom: 0.5rem;
-  }
-  .home-prose :global(img) {
-    width: 100%;
-    border-radius: 2px;
-    margin-block: 1.75rem;
-  }
-  .home-prose :global(hr) {
-    border: 0;
+  .vm {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
     border-top: 1px solid var(--color-rule);
-    margin-block: clamp(2.5rem, 5vw, 4rem);
   }
-  .home-prose :global(p) {
-    line-height: 1.8;
+  @media (min-width: 640px) { .vm { grid-template-columns: 1fr 1fr; } }
+  .vm__label {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+  }
+  .vm__text { color: var(--color-ink-2); line-height: 1.75; margin: 0; }
+
+  .ministries { display: flex; flex-direction: column; gap: clamp(3rem, 6vw, 5.5rem); }
+  .ministry {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .ministry { grid-template-columns: 1fr 1fr; }
+    .ministry--flip .ministry__media { order: 2; }
+  }
+  .ministry__media { display: block; overflow: hidden; border-radius: 14px; }
+  .ministry__media img {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    display: block;
+    transition: transform 700ms ease;
+  }
+  .ministry__media:hover img { transform: scale(1.03); }
+  .ministry__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
+    font-weight: 500;
+    margin: 0 0 1rem;
+  }
+  .ministry__title a { color: var(--color-ink); }
+  .ministry__title a:hover { color: var(--color-brand); }
+  .ministry__blurb {
     color: var(--color-ink-2);
+    line-height: 1.8;
+    margin: 0 0 1.5rem;
+  }
+
+  .donate-cta__text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+    line-height: 1.4;
+    color: var(--color-ink);
+    margin: 0.5rem 0 0;
+    text-wrap: balance;
   }
 </style>

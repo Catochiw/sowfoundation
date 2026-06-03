@@ -21,7 +21,7 @@ ROOT = Path("/Users/catochiw/Downloads/sowfoundation/sowfoundation-v2/src/conten
 
 # slug in DB -> (our_md_filename, group)
 SLUG_MAP = {
-    "home": "home", "org": "org", "directors": "directors",
+    "org": "org", "directors": "directors",
     "zz": "senior-care", "jz": "disaster-relief", "fp": "poverty-relief",
     "zx": "scholarship", "co": "pandemic-response",
 }
@@ -143,6 +143,38 @@ def main() -> int:
         by_slug[mysql_unescape(slug)] = (mysql_unescape(c_en), mysql_unescape(c_zh))
 
     all_ok = True
+
+    # Composed pages (home, donate) keep their text in structured TS data
+    # instead of a .md. Assert every content string there is a verbatim
+    # substring of the original DB page — proves nothing was invented.
+    DATA = ROOT.parent.parent / "data"
+    for data_file, db_slug in (("home.ts", "home"), ("donate.ts", "donation")):
+        c_en, c_zh = by_slug[db_slug]
+        ref = full_norm(strip_html(c_en) + " " + strip_html(c_zh))
+        text = (DATA / data_file).read_text(encoding="utf-8")
+        # drop comments (so commented examples aren't treated as content)
+        text = re.sub(r"/\*.*?\*/", "", text, flags=re.DOTALL)
+        text = re.sub(r"//[^\n]*", "", text)
+        missing = []
+        for s in re.findall(r'"((?:[^"\\]|\\.)*)"', text):
+            s = s.replace('\\"', '"')
+            if s.startswith(("/", "@", "http")):
+                continue
+            if re.fullmatch(r"[A-Za-z0-9_]+", s):   # identifiers / button IDs, not prose
+                continue
+            n = full_norm(s)
+            if len(n) < 8:
+                continue
+            if n not in ref:
+                missing.append(s[:70])
+        if missing:
+            all_ok = False
+            print(f"\n{'='*72}\n[data] {data_file}: ✗ {len(missing)} string(s) NOT verbatim in DB:")
+            for mm in missing:
+                print(f"     + {mm}")
+        else:
+            print(f"[data] {data_file}: ✓ all content strings verbatim from the original")
+
     for db_slug, fname in SLUG_MAP.items():
         if db_slug not in by_slug:
             print(f"!! {db_slug} not found in dump")
