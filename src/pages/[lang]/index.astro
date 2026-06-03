@@ -1,7 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/Hero.astro";
-import HomeSlider from "@components/HomeSlider.astro";
 import { getCollection, render } from "astro:content";
 import { allLocales, type Lang } from "@i18n/ui";
 
@@ -22,10 +21,8 @@ const { Content } = home ? await render(home) : { Content: null };
   <!-- Grand centered brand mark -->
   <Hero lang={lang} />
 
-  <!-- The original top-of-page element: the ministry slider -->
-  <HomeSlider lang={lang} />
-
-  <!-- Original homepage copy, rendered faithfully from home.md -->
+  <!-- Original homepage copy, rendered faithfully from home.md
+       (關於我們 / 願景 / 使命 + the ministry sections). No invented copy. -->
   {Content && (
     <section id="about" class="section">
       <article class="container-prose prose-content home-prose">

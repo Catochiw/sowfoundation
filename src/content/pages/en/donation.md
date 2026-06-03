@@ -1,5 +1,4 @@
 ---
-# extract-skip: true
 title: "Donate"
 group: donation
 order: 0
@@ -8,18 +7,16 @@ lang: en
 summary: "Your gift sustains every ministry. Give via PayPal or mail a check — all donations are tax-deductible."
 ---
 
-## How your gift is used
+Serving Others Worldwide (S.O.W.) is an U.S.A IRS approved 501(c)(3) nonprofit organization.
 
-S.O.W. is a volunteer-led nonprofit. We have no paid staff, so **100% of your gift** goes directly into ministry programs:
+Donations are tax-deductible to the extent permitted by law. Our Federal Tax ID # is 81-3947479.
 
-- **Senior Care** — free home maintenance for Bay Area seniors
-- **Disaster Relief** — coordinated response with local churches
-- **Poverty Relief** — direct aid to families and individuals worldwide
-- **Scholarship** — one-to-one student sponsorships
-- **Holy Land Tours** — volunteer-led pilgrimages and field studies
+Please make donations payable to S.O.W., and mail to:S.O.W.
 
-Every gift receives an IRS-recognized tax-deductible receipt. Federal Tax ID: 81-3947479.
+6280 W. Las Positas Blvd., Suite 203Pleasanton, CA 94588U.S.A.
 
-## Other ways to give
+You may also donate via Paypal, by clicking on the button provided below:General Donation
 
-In addition to PayPal, check, and stock donations above, you can reach out by phone or email and we'll help you choose the giving method that works best for you.
+[![](/images/20180315/unnamed.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2DCLT2AW2RR98)
+
+Ukraine Refugee ReliefCharles Schwab Account Number: 4507-8379Here is our contact phone number and email:Tel: 1+ (510) 256-5156Email: info@sowfoundation.orgThank you so much for your generosity!

@@ -16,11 +16,10 @@ const { lang, pathWithoutLang } = Astro.props;
   <div class="container-edge flex h-[64px] items-center justify-between gap-6">
     <a
       href={`/${lang}`}
-      class="flex items-center gap-2.5 text-[color:var(--color-ink)] hover:text-[color:var(--color-ink)]"
+      class="inline-flex items-center"
       aria-label={t(lang, "site.name")}
     >
-      <img src="/sow-logo.png" alt="" width="28" height="28" class="opacity-90" />
-      <span class="font-serif text-lg tracking-tight">{t(lang, "site.name")}</span>
+      <img src="/sow-logo.png" alt={t(lang, "site.name")} class="h-8 w-auto" />
     </a>
 
     <!-- Desktop nav -->

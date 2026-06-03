@@ -1,5 +1,4 @@
 ---
-# extract-skip: true
 title: "方舟之旅"
 group: tours
 order: 2
@@ -8,18 +7,26 @@ lang: zh
 summary: "追尋諾亞方舟、出埃及路線等舊約場景的考察旅程,從地理切入信仰。"
 ---
 
-「方舟之旅」是樂助會策劃的舊約聖經實地考察行程,由林修榮弟兄帶領,主領聚會和講解。透過實地走訪諾亞方舟、出埃及路線等聖經場景,讓參與者從地理、歷史的角度更深入認識神的救贖故事。
+### 特別通告
 
-## 行程特色
+因為疫情COVID-19的原故，所有2021年方舟之旅的旅行團都已取消。
 
-- 義工帶領、不收取領隊酬勞
-- 由聖經學者隨團講解
-- 聖經故事與實地考察融合,深化信仰理解
+![coverarkencounter](https://sauwingcom.files.wordpress.com/2019/07/ark-tour-cchc-poster-2019-october.jpg?w=1404)
 
-## 參加方式
+![ark tour Daily schedule.jpg](https://sauwingcom.files.wordpress.com/2018/02/ark-tour-daily-schedule1.jpg?w=702)
 
-如對下一次方舟之旅有興趣,歡迎透過 [聯絡我們](/zh/contact) 與樂助會聯繫,或致電 (510) 256-5156。
+![ark tour Brochure page 1](https://sauwingcom.files.wordpress.com/2018/02/ark-tour-brochure-page-1.jpg?w=702)
 
----
+![ark tour Brochure page 3](https://sauwingcom.files.wordpress.com/2018/02/ark-tour-brochure-page-3.jpg?w=702)
 
-*註:2021 年的方舟之旅因 COVID-19 疫情已全部取消。下一次出團時間請以樂助會公告為準。*
+![ark tour Brochure page 4](https://sauwingcom.files.wordpress.com/2018/02/ark-tour-brochure-page-4.jpg?w=702)
+
+#### [點擊這裡下載報名表格](https://drive.google.com/file/d/1t9mkDy7C91Gd3FFnSZx6L_5gTW4poyDh/view?usp=sharing)
+
+您也可以使用Paypal安全地在網上付費：You may also make payment via Paypal, by clicking on the button provided below:
+
+|  |
+| --- |
+| TOURS |
+| Holy Land Tour Ark Encounter Tour Other Tours |
+| Note to S.O.W. |

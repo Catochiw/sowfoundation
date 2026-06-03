@@ -1,5 +1,4 @@
 ---
-# extract-skip: true
 title: "Holy Land Tour"
 group: tours
 order: 1
@@ -8,24 +7,12 @@ lang: en
 summary: "On-site Holy Land study tours led by biblical scholars — Scripture comes alive in 3D."
 ---
 
-"Read ten thousand books — walk ten thousand miles." S.O.W. plans and organises Holy Land study tours, retreat camps, and mission-themed journeys. By weaving on-site exploration, scholar-led teaching, and applied learning together, participants come to know Christian faith, history, and culture in a way that deeply shapes the spiritual life.
+Study – Abroad ToursS.O.W. plans and arranges Holy Land tours, spiritual retreats, mission trips and other thematic study-abroad tours. Through field trips and real-time lectures, incorporating theory with practice, participants can learn and have fun with interactive teaching methods to enhance their understanding of Christian faith, its history and culture. There will be a positive and far-reaching impact on their spiritual life as well.
 
-## What makes the Holy Land Tour different
+Holy Land toursThrough actual field studies and a guide from biblical scholars, SOW Holy Land Tour turns the biblical stories, characters, and geography into living 3-dimensional form and helps you to break through the traditional way of studying the bible on paper. For Christians, following the footsteps of Jesus to revisit the Holy Land and reminiscing Jesus obeying the command of our Father to travel through the land to spread the Gospel and deliver salvation to us will help us to deepen our understanding of our Lord and ourselves.
 
-On-site experience, guided learning, and biblical scholarship combine to make the places, people, and stories of Scripture come alive — three-dimensional rather than flat on the page. For Christians, retracing the footsteps of Jesus and remembering His obedience to the Father's mission deepens our knowledge of God, and of ourselves.
+The itinerary of the tour includes a guide to revisit the holy places, apostle’s travels, and to witness the history of early churches. Participants will be able to come in contact with the “land,” “events,” and “things” of historical importance in the Bible. The purpose of the tour is to increase participants’ knowledge of the Bible, to connect the Bible and its geography to their life, and to strengthen their faith in Christianity.  Experiencing the Holy Land will have a profound impact on one’s spiritual life and allows one to understand the Great Commission of God, igniting the passion for mission work.
 
-## What we cover
+All staff members serving on this tour are volunteers without any forms of compensation. They serve wholeheartedly and lead by example to help brothers and sisters to further their faith in Christianity and affirm the truth in Jesus Christ.
 
-The Holy Land Tour weaves together three themes:
-
-- **The Land of the Bible** — touch the places, events, and objects of Scripture in person
-- **The Apostles' Footsteps** — trace Paul's missionary routes and the spread of the early church
-- **Church History** — understand the Great Commission through the early church's growth, and let it kindle your own passion for mission
-
-## Volunteer-led
-
-Every member of the tour staff serves as a volunteer — without salary — leading, serving, and teaching the group out of full-life devotion, so that participants can come to know Christian faith more deeply and confirm the reality of Jesus Christ.
-
-## Upcoming
-
-The most recent tour is the [2026 Patmos · Revelation & Paul's Footsteps — Greece, Turkey & Santorini, 13 Days](/en/tours/2026-greece-turkey) (April 25 – May 7, 2026). If you're interested in future Holy Land journeys, please [get in touch](/en/contact) and we'll keep you posted.
+ Please switch the language to Chinese to see the upcoming tour.
