@@ -16,53 +16,28 @@ const { lang } = Astro.props;
       <span>Pleasanton, California</span>
     </p>
 
-    <!-- Centered brand mark — the homepage's single grand gesture.
-         The logo already carries the "Serving Others Worldwide" wordmark,
-         so no additional slogan is layered on top of it. -->
+    <!-- Centered brand mark. The logo already carries the
+         "Serving Others Worldwide" wordmark, so no slogan is layered on. -->
     <a href={`/${lang}`} class="hero__mark" aria-label={t(lang, "site.name")}>
       <img src="/sow-logo.png" alt={t(lang, "site.name")} width="500" height="206" />
     </a>
-
-    <div class="hero__rule" aria-hidden="true"></div>
   </div>
-
-  <a href="#about" class="hero__scroll" aria-label="Scroll">
-    <span class="hero__scroll-line" aria-hidden="true"></span>
-  </a>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    min-height: clamp(440px, 64vh, 640px);
-    display: flex;
-    align-items: center;
     background: var(--color-canvas);
-    overflow: hidden;
+    text-align: center;
   }
-  .hero::before,
-  .hero::after {
-    content: "";
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: var(--color-rule);
-    pointer-events: none;
-  }
-  .hero::before { left: 0; }
-  .hero::after { right: 0; }
-
   .hero__inner {
     width: 100%;
     max-width: 880px;
     margin-inline: auto;
-    padding: clamp(3rem, 6vw, 5rem) 1.5rem clamp(2.5rem, 4vw, 3.5rem);
-    text-align: center;
+    padding: clamp(2.25rem, 4vw, 3.5rem) 1.5rem clamp(2rem, 3.5vw, 3rem);
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .hero__est {
     font-family: var(--font-sans);
     font-size: 0.75rem;
@@ -70,45 +45,19 @@ const { lang } = Astro.props;
     color: var(--color-ink-3);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
     display: inline-flex;
     align-items: center;
     gap: 0.75em;
   }
   .hero__est-dot { opacity: 0.5; }
-
   .hero__mark {
     display: inline-flex;
     transition: opacity 200ms ease;
   }
   .hero__mark:hover { opacity: 0.85; }
   .hero__mark img {
-    width: clamp(260px, 34vw, 380px);
+    width: clamp(220px, 28vw, 320px);
     height: auto;
-  }
-
-  .hero__rule {
-    width: 1px;
-    height: clamp(2rem, 4vw, 3.5rem);
-    background: var(--color-rule);
-    margin-top: clamp(2rem, 3vw, 2.75rem);
-  }
-
-  .hero__scroll {
-    position: absolute;
-    left: 50%;
-    bottom: clamp(1.25rem, 3vw, 2rem);
-    transform: translateX(-50%);
-    display: inline-flex;
-    padding: 0.5rem;
-    color: var(--color-ink-3);
-    transition: color 200ms ease;
-  }
-  .hero__scroll:hover { color: var(--color-ink); }
-  .hero__scroll-line {
-    display: block;
-    width: 1px;
-    height: 36px;
-    background: linear-gradient(180deg, transparent, currentColor);
   }
 </style>

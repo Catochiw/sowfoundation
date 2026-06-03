@@ -19,7 +19,7 @@ const tours = (
   <PageHero eyebrow={t(lang, "site.tagline")} title={t(lang, "nav.tours")} />
 
   <section class="section">
-    <div class="container-prose">
+    <div class="container-wide">
       <ul class="index-list">
         {tours.map((p) => {
           const slug = p.id.split("/").pop() ?? "";
