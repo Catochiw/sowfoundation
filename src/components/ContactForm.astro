@@ -100,14 +100,20 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
   submit: t(lang, "contact.form.submit"),
   submitting: t(lang, "contact.form.submitting"),
   success: t(lang, "contact.form.success"),
-  error: t(lang, "contact.form.error"),
-  required: t(lang, "contact.form.required"),
+  incomplete: t(lang, "contact.form.incomplete"),
+  invalidEmail: t(lang, "contact.form.invalidEmail"),
+  serverError: t(lang, "contact.form.serverError"),
+  networkError: t(lang, "contact.form.networkError"),
 }}}>
   const form = document.querySelector("[data-contact-form]");
   if (form) {
     const submit = form.querySelector("[data-cf-submit]");
     const label = form.querySelector("[data-cf-label]");
     const status = form.querySelector("[data-cf-status]");
+    const nameEl = form.querySelector("#cf-name");
+    const emailEl = form.querySelector("#cf-email");
+    const messageEl = form.querySelector("#cf-message");
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const setStatus = (msg, kind) => {
       if (!status) return;
@@ -119,8 +125,38 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
         : "text-[color:var(--color-error)]");
     };
 
+    const setInvalid = (el, bad) => {
+      if (!el) return;
+      if (bad) el.setAttribute("aria-invalid", "true");
+      else el.removeAttribute("aria-invalid");
+    };
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // 1) Validate in the browser first — show a specific, actionable message
+      //    and move focus to the field that needs fixing.
+      const name = ((nameEl && nameEl.value) || "").trim();
+      const email = ((emailEl && emailEl.value) || "").trim();
+      const message = ((messageEl && messageEl.value) || "").trim();
+      setInvalid(nameEl, false);
+      setInvalid(emailEl, false);
+      setInvalid(messageEl, false);
+
+      if (!name || !email || !message) {
+        const firstEmpty = !name ? nameEl : !email ? emailEl : messageEl;
+        setInvalid(firstEmpty, true);
+        setStatus(messages.incomplete, "err");
+        if (firstEmpty) firstEmpty.focus();
+        return;
+      }
+      if (!emailRe.test(email)) {
+        setInvalid(emailEl, true);
+        setStatus(messages.invalidEmail, "err");
+        if (emailEl) emailEl.focus();
+        return;
+      }
+
       const data = new FormData(form);
       submit.setAttribute("disabled", "true");
       label.textContent = messages.submitting;
@@ -136,11 +172,25 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
           }
           setStatus(messages.success, "ok");
         } else {
-          setStatus(messages.error, "err");
+          // 2) Map the server's error code to a specific message.
+          let code = "";
+          try {
+            const body = await res.json();
+            if (body && typeof body.error === "string") code = body.error;
+          } catch (_) {}
+          if (code === "invalid_input") {
+            setInvalid(emailEl, true);
+            setStatus(messages.invalidEmail, "err");
+            if (emailEl) emailEl.focus();
+          } else {
+            // bot_check_failed / email_not_configured / no_recipients / send_failed / unknown
+            // — nothing the visitor can fix; offer the direct-email fallback.
+            setStatus(messages.serverError, "err");
+          }
         }
       } catch (err) {
         console.error(err);
-        setStatus(messages.error, "err");
+        setStatus(messages.networkError, "err");
       } finally {
         submit.removeAttribute("disabled");
         label.textContent = messages.submit;
