@@ -16,6 +16,16 @@ export default defineConfig({
     webAnalytics: { enabled: true },
     imageService: true,
   }),
+  // Disable Astro's CSRF origin check. Behind Vercel's proxy the request origin
+  // Astro computes doesn't match the public Origin header, so the default
+  // checkOrigin rejects EVERY form POST — including the legitimate contact form —
+  // with "Cross-site POST form submissions are forbidden". /api/contact is a
+  // public, unauthenticated endpoint (no session/cookies to forge), so CSRF
+  // checking buys no real protection here; spam is handled by the honeypot
+  // (and optional Turnstile). See ContactForm.astro / src/pages/api/contact.ts.
+  security: {
+    checkOrigin: false,
+  },
   i18n: {
     locales: ["zh", "en"],
     defaultLocale: "zh",
