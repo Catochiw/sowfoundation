@@ -298,6 +298,171 @@
 
 .prose-content p { margin: 0; }
 
+/* Responsive YouTube embed: <div class="video-embed"><iframe …></iframe></div> */
+.prose-content .video-embed {
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-rule);
+}
+.prose-content .video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Placeholder standing in for a video that has not been uploaded yet:
+   a still frame from the clip, with a play badge. Replace the whole
+   <figure> with a .video-embed iframe once the video is live. */
+.prose-content .video-pending {
+  position: relative;
+  margin: 0;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #101010;
+}
+
+/* `contain`, not `cover`: the vertical phone clips sit pillarboxed in a 16:9
+   frame, which is exactly how they will look once the YouTube embed replaces
+   this — and it keeps every row the same height without cropping anything. */
+.prose-content .video-pending img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: saturate(0.85) brightness(0.92);
+}
+
+
+.prose-content .video-pending figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0));
+}
+
+/* Play triangle, drawn with borders so it needs no asset. */
+.prose-content .video-pending figcaption::before {
+  content: "";
+  flex: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent #fff;
+}
+
+/* ── Testimony tiles ─────────────────────────────────────────────────────
+   Built by src/lib/rehype-testimony-rows.mjs from a page whose frontmatter
+   says `display: rows`. Same card shape and two-up grid as the donate page:
+   bordered paper, 14px radius, one thumbnail per tile. */
+
+.prose-rows { max-width: none; }
+.prose-rows > * + * { margin-top: 0; }
+
+.testimony-intro {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.6rem);
+  line-height: 1.6;
+  color: var(--color-ink);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.testimony-intro > * + * { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
+/* Only the copy is measure-limited; the stat band spans the full width. */
+.testimony-intro > p { max-width: 62ch; }
+
+.tile-grid {
+  display: grid;
+  gap: 1.25rem;
+  /* Two columns wherever a 420px column fits twice, one below that. The
+     container caps at 1180px, so this never reaches a third column. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid var(--color-rule);
+  background: var(--color-paper);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.tile__media .video-pending,
+.tile__media .video-embed {
+  max-width: none;
+  border-radius: 10px;
+}
+
+.tile__body > * + * { margin-top: 1rem; }
+
+/* The card carries the section, so the heading drops the prose rule and the
+   big top margin it uses in a single column. */
+.tile__body h2 {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  font-size: clamp(1.375rem, 1.2vw + 0.9rem, 1.75rem);
+  line-height: 1.2;
+}
+
+/* The speaker's name — the lone bold paragraph under each heading. */
+.tile__body h2 + p strong {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+/* Tracking that flatters Latin names pulls Chinese ones apart. */
+:lang(zh-Hant) .tile__body h2 + p strong { letter-spacing: 0.02em; }
+.tile__body h2 + p { margin-top: 0.625rem; }
+
+.tile__body .verse {
+  font-size: clamp(1.0625rem, 0.6vw + 0.9rem, 1.25rem);
+  margin: 1.25rem 0 0;
+  padding-left: 1rem;
+}
+
+/* ── Stat band ───────────────────────────────────────────────────────────
+   <div class="stat-band"> of <div class="stat"> blocks, each a <b> figure
+   over a plain-text label. Written by hand in the markdown. */
+.stat-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  padding-block: clamp(1.75rem, 3vw, 2.5rem);
+  border-block: 1px solid var(--color-rule);
+}
+.stat { min-width: 110px; max-width: 22ch; }
+.stat b {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-brand);
+}
+.stat span {
+  display: block;
+  font-family: var(--font-sans);
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-ink-3);
+}
+
 .prose-content a {
   color: var(--color-ink);
   border-bottom: 1px solid var(--color-rule);

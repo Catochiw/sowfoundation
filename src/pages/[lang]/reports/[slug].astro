@@ -21,17 +21,24 @@ const all = await getCollection("pages", ({ data }) => data.lang === lang && dat
 const entry = all.find((p) => p.id === `${lang}/${slug}` || p.id.endsWith(`/${slug}`));
 if (!entry) return new Response("Not found", { status: 404 });
 const { Content } = await render(entry);
+const rows = entry.data.display === "rows";
 ---
 
-<Layout lang={lang} title={entry.data.title} pathWithoutLang={`/reports/${slug}`}>
+<Layout lang={lang} title={entry.data.title} description={entry.data.summary} pathWithoutLang={`/reports/${slug}`} noindex={entry.data.noindex}>
   <PageHero
     eyebrow={t(lang, "nav.reports")}
     title={entry.data.title}
     banner={entry.data.banner}
   />
   <section class="section">
-    <article class="container-prose prose-content">
-      <Content />
-    </article>
+    {rows ? (
+      /* Tiles need the wide container's full 1180px, so the width cap lives on
+         the wrapper — `prose-rows` clears the 65ch measure on the article. */
+      <div class="container-wide">
+        <article class="prose-content prose-rows"><Content /></article>
+      </div>
+    ) : (
+      <article class="container-prose prose-content"><Content /></article>
+    )}
   </section>
 </Layout>

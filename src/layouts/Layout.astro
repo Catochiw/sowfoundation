@@ -14,6 +14,8 @@ interface Props {
   pathWithoutLang?: string;
   /** Extra class on <main> */
   mainClass?: string;
+  /** Keep this page out of search engines */
+  noindex?: boolean;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   ogImage = "/sow-logo.png",
   pathWithoutLang = "",
   mainClass = "",
+  noindex = false,
 } = Astro.props;
 
 const siteName = t(lang, "site.name");
@@ -42,6 +45,7 @@ const htmlLang = lang === "zh" ? "zh-Hant" : "en-US";
 
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
     <!-- hreflang alternates -->

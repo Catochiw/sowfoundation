@@ -24,6 +24,10 @@ const pages = defineCollection({
     banner: z.string().optional(),
     summary: z.string().optional(),
     lang: z.enum(["zh", "en"]),
+    /** Unlisted page: adds robots noindex. Also add its path to UNLISTED in astro.config.mjs. */
+    noindex: z.boolean().default(false),
+    /** "rows" lays the page out as alternating media/text rows (see rehype-testimony-rows). */
+    display: z.enum(["prose", "rows"]).default("prose"),
   }),
 });
 

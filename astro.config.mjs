@@ -3,8 +3,13 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
+import rehypeTestimonyRows from "./src/lib/rehype-testimony-rows.mjs";
 
 const SITE = "https://www.sowfoundation.org";
+
+// Unlisted pages (reachable by URL only): kept out of the sitemap.
+// Pair with `noindex: true` in the page's frontmatter.
+const UNLISTED = ["/reports/ukraine-testimonies"];
 
 export default defineConfig({
   site: SITE,
@@ -34,8 +39,14 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+  markdown: {
+    // Pages with `display: rows` in frontmatter are rebuilt into alternating
+    // media/text rows; every other page passes through untouched.
+    rehypePlugins: [rehypeTestimonyRows],
+  },
   integrations: [
     sitemap({
+      filter: (page) => !UNLISTED.some((p) => new URL(page).pathname.replace(/\/$/, "").endsWith(p)),
       i18n: {
         defaultLocale: "zh",
         locales: { zh: "zh-Hant", en: "en-US" },
